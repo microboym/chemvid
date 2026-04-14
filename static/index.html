@@ -3,171 +3,396 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>智化推 - 视频自动生成</title>
-    <!-- Use Bootstrap for quick, clean styling -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>智化推 - 化工短视频自动生成</title>
     <style>
-        body { background-color: #f8f9fa; padding-top: 50px; padding-bottom: 50px; }
-        .card { border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        #video-container { display: none; margin-top: 30px; }
-        video { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        :root {
+            --ink: #1d1f21;
+            --muted: #5d646b;
+            --line: #d7dde2;
+            --paper: #f7f9f8;
+            --white: #ffffff;
+            --green: #1f7a55;
+            --green-dark: #11543a;
+            --red: #c83232;
+            --gold: #d8a02a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--paper);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 14px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 20px;
+        }
+
+        .brand-mark {
+            display: inline-grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            color: var(--white);
+            background: var(--green);
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 20px;
+            border: 1px solid var(--green);
+            border-radius: 8px;
+            background: var(--green);
+            color: var(--white);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .button.secondary {
+            background: var(--white);
+            color: var(--green-dark);
+        }
+
+        .hero {
+            min-height: calc(100vh - 74px);
+            display: grid;
+            align-items: center;
+            border-bottom: 1px solid var(--line);
+            background:
+                linear-gradient(90deg, rgba(247, 249, 248, 0.94) 0%, rgba(247, 249, 248, 0.82) 46%, rgba(247, 249, 248, 0.28) 100%),
+                url("/static/hero-chem.svg") center / cover;
+        }
+
+        .hero-inner {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 70px 0 92px;
+        }
+
+        .hero-copy {
+            max-width: 680px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 18px;
+            color: var(--green-dark);
+            font-weight: 800;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 28px;
+            height: 3px;
+            border-radius: 3px;
+            background: var(--red);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(38px, 7vw, 74px);
+            line-height: 1.08;
+            letter-spacing: 0;
+        }
+
+        .lead {
+            max-width: 620px;
+            margin: 24px 0 0;
+            color: var(--muted);
+            font-size: 20px;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 34px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1px;
+            width: min(1120px, calc(100% - 32px));
+            margin: -48px auto 0;
+            border: 1px solid var(--line);
+            background: var(--line);
+        }
+
+        .stat {
+            min-height: 110px;
+            padding: 22px;
+            background: var(--white);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 26px;
+            color: var(--green-dark);
+        }
+
+        .stat span {
+            color: var(--muted);
+        }
+
+        .section {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 86px 0;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: clamp(28px, 4vw, 44px);
+            line-height: 1.18;
+            letter-spacing: 0;
+        }
+
+        .section p {
+            margin: 18px 0 0;
+            color: var(--muted);
+            font-size: 17px;
+        }
+
+        .feature-list {
+            display: grid;
+            gap: 16px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .feature-list li {
+            border-left: 4px solid var(--green);
+            padding: 16px 18px;
+            background: var(--white);
+        }
+
+        .feature-list strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 18px;
+        }
+
+        .feature-list span {
+            color: var(--muted);
+        }
+
+        .entry {
+            border-top: 1px solid var(--line);
+            background: var(--white);
+        }
+
+        .entry-inner {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 28px;
+            align-items: center;
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 62px 0;
+        }
+
+        .entry h2 {
+            max-width: 760px;
+        }
+
+        .entry p {
+            max-width: 720px;
+            margin: 14px 0 0;
+            color: var(--muted);
+        }
+
+        .site-footer {
+            border-top: 1px solid var(--line);
+            padding: 24px 0;
+            color: var(--muted);
+            background: var(--paper);
+        }
+
+        .footer-inner {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+            font-size: 14px;
+        }
+
+        @media (max-width: 760px) {
+            .nav {
+                align-items: flex-start;
+                gap: 14px;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .hero {
+                min-height: auto;
+            }
+
+            .hero-inner {
+                padding: 54px 0 86px;
+            }
+
+            .lead {
+                font-size: 18px;
+            }
+
+            .stats,
+            .section-grid,
+            .entry-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                margin-top: -36px;
+            }
+        }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-
-            <div class="text-center mb-4">
-                <h2 class="fw-bold">智化推 (Zhi Hua Tui)</h2>
-                <p class="text-muted">短视频自动生成 MVP - 产品类模板</p>
+    <header class="site-header">
+        <nav class="nav" aria-label="主导航">
+            <a class="brand" href="/">
+                <span class="brand-mark" aria-hidden="true">智</span>
+                <span>智化推</span>
+            </a>
+            <div class="nav-links">
+                <a href="#intro">产品介绍</a>
+                <a href="/static/manual.pdf">使用手册</a>
+                <a class="button" href="/generator">进入系统</a>
             </div>
+        </nav>
+    </header>
 
-            <div class="card p-4">
-                <form id="videoForm">
-                    <!-- Text Inputs -->
-                    <div class="mb-3">
-                        <label class="form-label">公司名称 / 品牌名</label>
-                        <input type="text" class="form-control" name="company_name" required placeholder="例如：山东精细化工有限公司">
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-inner">
+                <div class="hero-copy">
+                    <p class="eyebrow">面向化工企业的短视频生成工具</p>
+                    <h1 id="hero-title">输入产品信息，快速生成中文竖版推广短视频</h1>
+                    <p class="lead">智化推帮助中小型化工企业把产品名称、应用领域、性能卖点和企业图片合成为 15-20 秒推广视频，适合展会、客户沟通和新媒体发布前的快速出样。</p>
+                    <div class="actions" aria-label="主要操作">
+                        <a class="button" href="/generator">开始生成</a>
+                        <a class="button secondary" href="/static/manual.pdf">查看使用手册 PDF</a>
                     </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">产品名称</label>
-                        <input type="text" class="form-control" name="product_name" required placeholder="例如：高纯度聚氨酯">
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">应用领域 (用于痛点生成)</label>
-                        <input type="text" class="form-control" name="application_area" required placeholder="例如：建筑保温">
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">性能卖点</label>
-                        <input type="text" class="form-control" name="selling_points" required placeholder="例如：纯度≥99.5%，反应效率提升30%">
-                    </div>
-
-                    <hr class="my-4">
-
-                    <!-- Image Uploads -->
-                    <div class="mb-3">
-                        <label class="form-label">应用领域背景图 (用于痛点开场)</label>
-                        <input class="form-control" type="file" name="bg_img" accept="image/*" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">产品特写图 / 效果图</label>
-                        <input class="form-control" type="file" name="product_img" accept="image/*" required>
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="form-label">公司 LOGO / 门店照片</label>
-                        <input class="form-control" type="file" name="logo_img" accept="image/*" required>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" class="btn btn-primary w-100 py-2 fs-5" id="submitBtn">一键生成短视频</button>
-                </form>
-
-                <!-- Loading State -->
-                <div id="loading" class="text-center mt-4" style="display: none;">
-                    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                    <h5 class="mt-3" id="loadingText">正在合成视频中，请稍候...<br><small class="text-muted fs-6">（大约需要 1-2 分钟）</small></h5>
                 </div>
             </div>
+        </section>
 
-            <!-- Video Result Player -->
-            <div id="video-container" class="text-center">
-                <h4 class="text-success mb-3">✅ 生成成功！</h4>
-                <video id="resultVideo" controls width="360"></video>
-                <div class="mt-3">
-                    <a id="downloadBtn" href="#" class="btn btn-outline-success" download>下载视频</a>
+        <section class="stats" aria-label="产品能力">
+            <div class="stat">
+                <strong>3 张图片</strong>
+                <span>背景图、产品图、LOGO 或门店图</span>
+            </div>
+            <div class="stat">
+                <strong>4 段脚本</strong>
+                <span>痛点、产品、卖点、品牌收尾</span>
+            </div>
+            <div class="stat">
+                <strong>竖版成片</strong>
+                <span>自动配音、字幕和画面拼接</span>
+            </div>
+        </section>
+
+        <section class="section" id="intro">
+            <div class="section-grid">
+                <div>
+                    <h2>为化工产品推广准备的 MVP 工作流</h2>
+                    <p>当前版本聚焦产品类模板：先用应用领域引出客户痛点，再展示产品和性能卖点，最后用企业名称完成品牌露出。页面、字幕和配音均以中文业务场景为中心。</p>
+                </div>
+                <ul class="feature-list">
+                    <li>
+                        <strong>信息填写简单</strong>
+                        <span>只需填写公司名称、产品名称、应用领域和性能卖点。</span>
+                    </li>
+                    <li>
+                        <strong>素材要求清晰</strong>
+                        <span>上传应用背景图、产品图和企业 LOGO 或门店图即可进入合成。</span>
+                    </li>
+                    <li>
+                        <strong>成片便于复用</strong>
+                        <span>生成完成后可直接预览并下载 MP4 文件，用于后续修改或发布。</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="entry">
+            <div class="entry-inner">
+                <div>
+                    <h2>准备好产品资料后，进入生成页面。</h2>
+                    <p>使用手册 PDF 入口已预留，文件路径为 <span lang="en">static/manual.pdf</span>。文档上线后，首页链接会直接打开该文件。</p>
+                </div>
+                <div class="actions">
+                    <a class="button" href="/generator">进入生成页面</a>
+                    <a class="button secondary" href="/static/manual.pdf">打开使用手册</a>
                 </div>
             </div>
+        </section>
+    </main>
 
-        </div>
-    </div>
-</div>
-
-<script>
-    const form = document.getElementById('videoForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const loadingDiv = document.getElementById('loading');
-    const videoContainer = document.getElementById('video-container');
-    const resultVideo = document.getElementById('resultVideo');
-    const downloadBtn = document.getElementById('downloadBtn');
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault(); // Prevent page refresh
-
-        // Hide form, show loading
-        submitBtn.disabled = true;
-        loadingDiv.style.display = 'block';
-        videoContainer.style.display = 'none';
-
-        // Gather form data (including files)
-        const formData = new FormData(form);
-
-        try {
-            // 1. Send data to FastAPI to start the background task
-            const response = await fetch('/api/generate', {
-                method: 'POST',
-                body: formData
-            });
-            const data = await response.json();
-
-            if (data.task_id) {
-                // 2. Start polling the status endpoint every 3 seconds
-                pollStatus(data.task_id);
-            } else {
-                alert("提交失败，请重试！");
-                resetUI();
-            }
-        } catch (error) {
-            console.error(error);
-            alert("网络错误！");
-            resetUI();
-        }
-    });
-
-    function pollStatus(taskId) {
-        const intervalId = setInterval(async () => {
-            try {
-                const res = await fetch(`/api/status/${taskId}`);
-                const statusData = await res.json();
-
-                if (statusData.status === 'completed') {
-                    // Stop polling
-                    clearInterval(intervalId);
-
-                    // Show the video!
-                    loadingDiv.style.display = 'none';
-                    videoContainer.style.display = 'block';
-
-                    resultVideo.src = statusData.video_url;
-                    downloadBtn.href = statusData.video_url;
-
-                    submitBtn.disabled = false;
-                    form.reset();
-                } else if (statusData.status === 'failed') {
-                    clearInterval(intervalId);
-                    alert("视频生成失败，请检查服务器日志。");
-                    resetUI();
-                }
-                // If "processing", do nothing and wait for the next tick
-            } catch (err) {
-                console.error("Polling error:", err);
-            }
-        }, 3000); // Check every 3 seconds
-    }
-
-    function resetUI() {
-        submitBtn.disabled = false;
-        loadingDiv.style.display = 'none';
-    }
-</script>
-
+    <footer class="site-footer">
+        <div class="footer-inner">智化推 · 化工产品短视频自动生成 MVP</div>
+    </footer>
 </body>
 </html>

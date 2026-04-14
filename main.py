@@ -19,6 +19,10 @@ tasks_db = {}
 def serve_index():
     return FileResponse("static/index.html")
 
+@app.get("/generator")
+def serve_generator():
+    return FileResponse("static/generator.html")
+
 @app.post("/api/generate")
 async def generate_video(
     background_tasks: BackgroundTasks,
