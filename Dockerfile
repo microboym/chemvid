@@ -1,14 +1,20 @@
 # Use an official Python runtime as a parent image
 FROM python:3.12-slim
 
-ARG DEBIAN_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/debian
-ARG DEBIAN_SECURITY_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/debian-security
-ARG PIP_INDEX_URL=https://pypi.tuna.tsinghua.edu.cn/simple
+ARG DEBIAN_MIRROR=https://mirrors.aliyun.com/debian
+ARG DEBIAN_SECURITY_MIRROR=https://mirrors.aliyun.com/debian-security
+ARG PIP_INDEX_URL=https://mirrors.aliyun.com/pypi/simple
+ARG PIP_TRUSTED_HOST=mirrors.aliyun.com
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Use China-hosted mirrors for faster builds on servers in mainland China.
+# Use Alibaba Cloud mirrors for faster builds on servers in mainland China.
+# On Alibaba Cloud ECS VPC, these build args can be pointed at the internal mirror:
+#   --build-arg DEBIAN_MIRROR=http://mirrors.cloud.aliyuncs.com/debian
+#   --build-arg DEBIAN_SECURITY_MIRROR=http://mirrors.cloud.aliyuncs.com/debian-security
+#   --build-arg PIP_INDEX_URL=http://mirrors.cloud.aliyuncs.com/pypi/simple
+#   --build-arg PIP_TRUSTED_HOST=mirrors.cloud.aliyuncs.com
 # Docker registry mirrors for pulling the base image must be configured on the host Docker daemon.
 RUN set -eux; \
     if [ -f /etc/apt/sources.list.d/debian.sources ]; then \
@@ -49,7 +55,7 @@ RUN sed -i 's/<policy domain="path" rights="none" pattern="@\*"\/>/<!-- <policy 
 COPY requirements.txt .
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir --index-url "${PIP_INDEX_URL}" -r requirements.txt
+RUN pip install --no-cache-dir --index-url "${PIP_INDEX_URL}" --trusted-host "${PIP_TRUSTED_HOST}" -r requirements.txt
 
 # Copy the rest of the application code into the container
 COPY . .
