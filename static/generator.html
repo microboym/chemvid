@@ -659,6 +659,10 @@
                         clearInterval(intervalId);
                         alert("视频生成失败，请检查服务器日志。");
                         resetUI();
+                    } else if (statusData.status === 'not_found') {
+                        clearInterval(intervalId);
+                        alert("任务已失效，请刷新页面后重新提交。");
+                        resetUI();
                     }
                 } catch (err) {
                     console.error("Polling error:", err);

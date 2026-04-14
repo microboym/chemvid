@@ -4,7 +4,7 @@ import edge_tts
 from moviepy import ImageClip, TextClip, AudioFileClip, CompositeVideoClip, concatenate_videoclips
 
 FONT_PATH = "./font.ttf"
-RESOLUTION = (720, 1280) # Lower resolution for faster MVP rendering
+RESOLUTION = (540, 960) # Lower resolution for faster MVP rendering on small servers
 
 async def generate_tts(text: str, output_path: str):
     """Generates Chinese TTS audio using Microsoft Edge TTS."""
@@ -17,9 +17,9 @@ def create_segment(image_path, text, audio_path):
     audio_clip = AudioFileClip(audio_path)
     duration = audio_clip.duration
 
-    # 2. Load and format Image (Center crop to 720x1280)
+    # 2. Load and format Image (Center crop to vertical output resolution)
     img_clip = ImageClip(image_path)
-    # Resize height to 1280, then crop width to 720
+    # Resize height first, then crop to the target vertical width.
     img_clip = img_clip.resized(height=RESOLUTION[1]).cropped(x_center=img_clip.w/2, width=RESOLUTION[0])
     img_clip = img_clip.with_duration(duration)
 
@@ -76,12 +76,12 @@ def build_product_video(task_id: str, data: dict):
     # Export (Limit bitrate and use fast preset)
     final_video.write_videofile(
         output_filename,
-        fps=30,
+        fps=24,
         codec="libx264",
         audio_codec="aac",
-        bitrate="2000k",
+        bitrate="1200k",
         preset="ultrafast",
-        threads=4
+        threads=1
     )
 
     # Clean up memory and temp audio
