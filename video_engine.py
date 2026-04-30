@@ -1,7 +1,13 @@
 import os
 import asyncio
 import edge_tts
-from moviepy import ImageClip, TextClip, AudioFileClip, CompositeVideoClip, concatenate_videoclips
+from moviepy.editor import (
+    AudioFileClip,
+    CompositeVideoClip,
+    ImageClip,
+    TextClip,
+    concatenate_videoclips,
+)
 
 FONT_PATH = "./font.ttf"
 RESOLUTION = (540, 960) # Lower resolution for faster MVP rendering on small servers

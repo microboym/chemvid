@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智化推 - 登录</title>
+    <style>
+        :root {
+            --ink: #1d1f21;
+            --muted: #5d646b;
+            --line: #d7dde2;
+            --paper: #f7f9f8;
+            --white: #ffffff;
+            --green: #1f7a55;
+            --green-dark: #11543a;
+            --red: #c83232;
+            --gold: #d8a02a;
+            --shadow: 0 18px 45px rgba(29, 31, 33, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background:
+                linear-gradient(135deg, rgba(247, 249, 248, 0.96), rgba(247, 249, 248, 0.88)),
+                url("/static/hero-chem.svg") center top / cover fixed;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: min(1160px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 14px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .brand-mark {
+            display: inline-grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            color: var(--white);
+            background: var(--green);
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 20px;
+            border: 1px solid var(--green);
+            border-radius: 8px;
+            background: var(--green);
+            color: var(--white);
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .button.secondary {
+            background: var(--white);
+            color: var(--green-dark);
+        }
+
+        .page {
+            width: min(1160px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 44px 0 72px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 430px;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .hero-copy,
+        .panel,
+        .card {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-copy {
+            padding: clamp(26px, 5vw, 54px);
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 16px;
+            color: var(--green-dark);
+            font-weight: 800;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 28px;
+            height: 3px;
+            border-radius: 3px;
+            background: var(--red);
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0;
+        }
+
+        h1 {
+            font-size: clamp(34px, 5vw, 60px);
+            line-height: 1.08;
+        }
+
+        .lead {
+            max-width: 640px;
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .hero-meta {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .metric {
+            padding: 16px;
+            border-radius: 8px;
+            background: #f0f5f2;
+        }
+
+        .metric strong {
+            display: block;
+            color: var(--green-dark);
+            font-size: 24px;
+        }
+
+        .metric span {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .notice-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 26px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .notice-bar span {
+            padding: 8px 12px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: #fbfcfb;
+        }
+
+        .panel {
+            padding: 28px;
+        }
+
+        .login-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            min-height: 32px;
+            padding: 0 12px;
+            border-radius: 999px;
+            background: #eff7f3;
+            color: var(--green-dark);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-height: 42px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #fbfcfb;
+            color: var(--muted);
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            border-color: var(--green);
+            background: #eff7f3;
+            color: var(--green-dark);
+            font-weight: 800;
+        }
+
+        .field {
+            display: grid;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        label {
+            font-weight: 800;
+        }
+
+        input {
+            width: 100%;
+            min-height: 48px;
+            padding: 0 14px;
+            border: 1px solid #c7d0d7;
+            border-radius: 8px;
+            background: var(--white);
+            color: var(--ink);
+        }
+
+        input:focus {
+            outline: 3px solid rgba(31, 122, 85, 0.18);
+            border-color: var(--green);
+        }
+
+        .inline-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin: 6px 0 18px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .check {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .check input {
+            width: 18px;
+            min-height: 18px;
+            padding: 0;
+        }
+
+        .sub-actions {
+            display: grid;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .sub-actions .button.secondary {
+            width: 100%;
+        }
+
+        .mini-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .mini-links button {
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 8px 12px;
+            background: #fbfcfb;
+            color: var(--muted);
+            cursor: pointer;
+        }
+
+        .feedback {
+            display: none;
+            margin-top: 18px;
+            padding: 14px 16px;
+            border: 1px solid #cce0d5;
+            border-radius: 8px;
+            background: #eff7f3;
+            color: var(--green-dark);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .stack {
+            display: grid;
+            gap: 24px;
+        }
+
+        .card {
+            padding: 24px;
+        }
+
+        .list {
+            display: grid;
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .list-item {
+            padding: 14px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .list-item:first-child {
+            padding-top: 0;
+            border-top: 0;
+        }
+
+        .list-item strong {
+            display: block;
+            font-size: 16px;
+        }
+
+        .list-item span {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .trust-item {
+            padding: 14px;
+            border-radius: 8px;
+            background: #f5f8f6;
+        }
+
+        .trust-item strong {
+            display: block;
+            color: var(--green-dark);
+            font-size: 18px;
+        }
+
+        .trust-item span {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .site-footer {
+            border-top: 1px solid var(--line);
+            padding: 24px 0;
+            color: var(--muted);
+            background: rgba(247, 249, 248, 0.92);
+        }
+
+        .footer-inner {
+            width: min(1160px, calc(100% - 32px));
+            margin: 0 auto;
+            font-size: 14px;
+        }
+
+        @media (max-width: 980px) {
+            .hero,
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .nav {
+                align-items: flex-start;
+                gap: 14px;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .page {
+                padding: 32px 0 48px;
+            }
+
+            .hero-meta,
+            .trust-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="主导航">
+            <a class="brand" href="/">
+                <span class="brand-mark" aria-hidden="true">智</span>
+                <span>智化推</span>
+            </a>
+            <div class="nav-links">
+                <a href="/">首页</a>
+                <a href="/generator">视频生成</a>
+                <a href="/profile">用户中心</a>
+                <a href="/library">素材库</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page">
+        <section class="hero" aria-labelledby="login-title">
+            <div class="hero-copy">
+                <p class="eyebrow">企业账号登录</p>
+                <h1 id="login-title">进入化工企业短视频工作台，统一管理生成、审批与品牌素材</h1>
+                <p class="lead">面向精细化工、新材料、助剂与涂料企业的演示平台。登录后可查看企业视频额度、常用模板、内部素材库与审批通知，适合展会前快速出样与团队协同演示。</p>
+                <div class="hero-meta" aria-label="平台数据">
+                    <div class="metric">
+                        <strong>1260+</strong>
+                        <span>企业账号已开通演示</span>
+                    </div>
+                    <div class="metric">
+                        <strong>8.7 万</strong>
+                        <span>累计生成化工短视频片段</span>
+                    </div>
+                    <div class="metric">
+                        <strong>32 个</strong>
+                        <span>化工营销模板已接入</span>
+                    </div>
+                </div>
+                <div class="notice-bar" aria-label="登录提示">
+                    <span>企业账号统一通过 HTTPS 加密传输</span>
+                    <span>支持品牌素材隔离与审批留痕演示</span>
+                    <span>近 30 天新增 PVC、聚氨酯、涂料场景模板</span>
+                </div>
+            </div>
+
+            <section class="panel" aria-label="登录表单">
+                <div class="login-head">
+                    <div>
+                        <h2>登录智化推</h2>
+                        <p style="margin-top: 6px; color: var(--muted);">推荐使用企业管理员或市场运营账号体验。</p>
+                    </div>
+                    <span class="chip">演示环境</span>
+                </div>
+
+                <div class="auth-tabs" role="tablist" aria-label="登录方式">
+                    <button class="tab-btn active" type="button" data-mode="password">账号密码登录</button>
+                    <button class="tab-btn" type="button" data-mode="sms">短信快捷登录</button>
+                </div>
+
+                <form id="loginForm">
+                    <div class="field">
+                        <label for="mobileInput">企业手机号 / 工号邮箱</label>
+                        <input id="mobileInput" name="mobile" placeholder="例如：13800138000 或 market@huachengchem.com" required>
+                    </div>
+
+                    <div class="field" id="secretField">
+                        <label for="secretInput">登录密码</label>
+                        <input id="secretInput" name="password" type="password" placeholder="请输入企业账号密码" required>
+                    </div>
+
+                    <div class="inline-row">
+                        <label class="check">
+                            <input type="checkbox" checked>
+                            <span>记住登录状态</span>
+                        </label>
+                        <a href="#">忘记密码</a>
+                    </div>
+
+                    <button class="button" type="submit" id="loginBtn">登录并进入用户中心</button>
+
+                    <div class="sub-actions">
+                        <a class="button secondary" href="/generator">先体验视频生成页</a>
+                    </div>
+
+                    <div class="feedback" id="loginFeedback" aria-live="polite"></div>
+                </form>
+
+                <div class="mini-links" aria-label="其他入口">
+                    <button type="button" data-action="admin">企业管理员入口</button>
+                    <button type="button" data-action="sso">企业微信单点登录</button>
+                    <button type="button" data-action="trial">申请试用</button>
+                </div>
+            </section>
+        </section>
+
+        <section class="grid" aria-label="补充信息">
+            <div class="stack">
+                <article class="card">
+                    <h2>账号安全与使用说明</h2>
+                    <div class="list">
+                        <div class="list-item">
+                            <strong>账号安全提醒</strong>
+                            <span>演示环境已开启异地登录提醒、弱密码拦截与素材下载日志模拟，不涉及真实账号写入。</span>
+                        </div>
+                        <div class="list-item">
+                            <strong>推荐体验路径</strong>
+                            <span>登录后可查看华澄新材的套餐额度、最近生成记录、企业模板与品牌素材库。</span>
+                        </div>
+                        <div class="list-item">
+                            <strong>演示边界</strong>
+                            <span>本页面所有登录、试用、管理员入口均为前端演示，不会发起真实认证请求。</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h2>平台公告</h2>
+                    <div class="list">
+                        <div class="list-item">
+                            <strong>4 月 28 日 09:30 模板库更新</strong>
+                            <span>新增“阻燃剂解决方案”“水性涂料应用”两套中文脚本模板，适配展会邀约场景。</span>
+                        </div>
+                        <div class="list-item">
+                            <strong>4 月 25 日 18:00 审批流演示优化</strong>
+                            <span>支持在用户中心按“待确认 / 已通过 / 退回修改”筛选审批卡片。</span>
+                        </div>
+                        <div class="list-item">
+                            <strong>4 月 22 日 14:10 品牌资产扩展</strong>
+                            <span>素材库演示新增宣传文案、企业介绍资料与工厂场景图分组。</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <aside class="stack">
+                <article class="card">
+                    <h2>化工企业常见角色</h2>
+                    <div class="list">
+                        <div class="list-item">
+                            <strong>市场经理</strong>
+                            <span>管理活动素材、统一外发视频风格与宣传口径。</span>
+                        </div>
+                        <div class="list-item">
+                            <strong>销售支持</strong>
+                            <span>快速生成客户定制版产品视频，用于跟进和样品推广。</span>
+                        </div>
+                        <div class="list-item">
+                            <strong>企业管理员</strong>
+                            <span>管理账号权限、额度分配与模板审批状态。</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h2>服务可信度</h2>
+                    <div class="trust-grid">
+                        <div class="trust-item">
+                            <strong>17 个</strong>
+                            <span>细分行业场景覆盖</span>
+                        </div>
+                        <div class="trust-item">
+                            <strong>92%</strong>
+                            <span>演示用户认为可缩短出样时间</span>
+                        </div>
+                        <div class="trust-item">
+                            <strong>ISO 风格</strong>
+                            <span>支持质量与合规信息展示模板</span>
+                        </div>
+                        <div class="trust-item">
+                            <strong>7 x 12</strong>
+                            <span>工作时段演示支持与培训</span>
+                        </div>
+                    </div>
+                </article>
+            </aside>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">智化推 · 企业演示登录页，所有行为均为前端模拟。</div>
+    </footer>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab-btn');
+        const secretField = document.getElementById('secretField');
+        const secretInput = document.getElementById('secretInput');
+        const feedback = document.getElementById('loginFeedback');
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const mobileInput = document.getElementById('mobileInput');
+
+        tabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+                tabs.forEach((item) => item.classList.remove('active'));
+                tab.classList.add('active');
+                const mode = tab.dataset.mode;
+                const isSms = mode === 'sms';
+                secretField.querySelector('label').textContent = isSms ? '短信验证码' : '登录密码';
+                secretInput.type = isSms ? 'text' : 'password';
+                secretInput.placeholder = isSms ? '请输入 6 位短信验证码' : '请输入企业账号密码';
+            });
+        });
+
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            loginBtn.disabled = true;
+            feedback.style.display = 'block';
+            feedback.textContent = '正在进入演示环境... 本次登录不会校验真实账号，2 秒后跳转至用户中心。';
+
+            window.setTimeout(() => {
+                const account = mobileInput.value.trim() || '演示账号';
+                window.location.href = `/profile?demoAccount=${encodeURIComponent(account)}`;
+            }, 2000);
+        });
+
+        document.querySelectorAll('.mini-links button').forEach((button) => {
+            button.addEventListener('click', () => {
+                const actionMap = {
+                    admin: '企业管理员入口为演示按钮，正式版可接入权限控制与审批配置。',
+                    sso: '企业微信单点登录为演示入口，当前不会跳转到第三方认证。',
+                    trial: '申请试用为演示交互，可在销售演示时引导客户进入用户中心或素材库。'
+                };
+                feedback.style.display = 'block';
+                feedback.textContent = actionMap[button.dataset.action];
+            });
+        });
+    </script>
+</body>
+</html>

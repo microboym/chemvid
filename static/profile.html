@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智化推 - 用户中心</title>
+    <style>
+        :root {
+            --ink: #1d1f21;
+            --muted: #5d646b;
+            --line: #d7dde2;
+            --paper: #f7f9f8;
+            --white: #ffffff;
+            --green: #1f7a55;
+            --green-dark: #11543a;
+            --red: #c83232;
+            --gold: #d8a02a;
+            --shadow: 0 18px 45px rgba(29, 31, 33, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--paper);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 14px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .brand-mark {
+            display: inline-grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            color: var(--white);
+            background: var(--green);
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0 18px;
+            border: 1px solid var(--green);
+            border-radius: 8px;
+            background: var(--green);
+            color: var(--white);
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .button.secondary {
+            background: var(--white);
+            color: var(--green-dark);
+        }
+
+        .page {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 34px 0 72px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 300px;
+            gap: 24px;
+            padding: clamp(24px, 4vw, 38px);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background:
+                linear-gradient(135deg, rgba(17, 84, 58, 0.96), rgba(31, 122, 85, 0.88)),
+                url("/static/hero-chem.svg") center / cover;
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .hero h1,
+        .hero h2,
+        .hero h3,
+        .hero p {
+            margin: 0;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 14px;
+            color: rgba(255, 255, 255, 0.82);
+            font-weight: 800;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 28px;
+            height: 3px;
+            border-radius: 3px;
+            background: var(--gold);
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            line-height: 1.1;
+        }
+
+        .hero p {
+            margin-top: 14px;
+            max-width: 720px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .hero-actions .button.secondary {
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.12);
+            color: var(--white);
+        }
+
+        .hero-side {
+            display: grid;
+            gap: 12px;
+        }
+
+        .stat-card {
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: 24px;
+        }
+
+        .stat-card span {
+            display: block;
+            margin-top: 4px;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 14px;
+        }
+
+        .overview {
+            display: grid;
+            grid-template-columns: 290px minmax(0, 1fr);
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .panel,
+        .section-card,
+        .record,
+        .template-card,
+        .approval-card {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .panel {
+            padding: 24px;
+        }
+
+        .company-card {
+            display: grid;
+            gap: 18px;
+        }
+
+        .logo-mark {
+            display: inline-grid;
+            place-items: center;
+            width: 68px;
+            height: 68px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #1f7a55, #11543a);
+            color: var(--white);
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        .meta-list {
+            display: grid;
+            gap: 10px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .chip-row,
+        .tabs,
+        .filter-row,
+        .card-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .chip,
+        .filter-btn,
+        .tab-btn {
+            display: inline-flex;
+            align-items: center;
+            min-height: 34px;
+            padding: 0 12px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: #fbfcfb;
+            color: var(--muted);
+            cursor: pointer;
+        }
+
+        .tab-btn.active,
+        .filter-btn.active {
+            border-color: var(--green);
+            background: #eff7f3;
+            color: var(--green-dark);
+            font-weight: 800;
+        }
+
+        .chip {
+            cursor: default;
+        }
+
+        .section-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .section-top h2,
+        .section-card h3,
+        .record h3,
+        .template-card h3,
+        .approval-card h3 {
+            margin: 0;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .section-card {
+            padding: 22px;
+            margin-bottom: 16px;
+        }
+
+        .key-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            color: var(--muted);
+        }
+
+        .key-grid strong {
+            display: block;
+            color: var(--ink);
+            font-size: 15px;
+        }
+
+        .usage-bar {
+            margin-top: 14px;
+        }
+
+        .usage-track {
+            overflow: hidden;
+            height: 12px;
+            border-radius: 999px;
+            background: #e5ece8;
+        }
+
+        .usage-fill {
+            height: 100%;
+            width: 72%;
+            background: linear-gradient(90deg, #1f7a55, #3aa473);
+        }
+
+        .list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .record,
+        .template-card,
+        .approval-card {
+            padding: 18px;
+        }
+
+        .record-meta,
+        .template-meta,
+        .approval-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 14px;
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            min-height: 30px;
+            padding: 0 10px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .status.ok {
+            background: #eff7f3;
+            color: var(--green-dark);
+        }
+
+        .status.warn {
+            background: #fff5df;
+            color: #8d6211;
+        }
+
+        .status.wait {
+            background: #f6ecec;
+            color: #8b3838;
+        }
+
+        .collapse-body {
+            display: none;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+        }
+
+        .approval-card.open .collapse-body {
+            display: block;
+        }
+
+        .dialog-backdrop {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(17, 20, 22, 0.42);
+        }
+
+        .dialog-backdrop.open {
+            display: flex;
+        }
+
+        .dialog {
+            width: min(560px, 100%);
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .dialog h2,
+        .dialog p {
+            margin: 0;
+        }
+
+        .dialog p {
+            margin-top: 12px;
+            color: var(--muted);
+        }
+
+        .dialog-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .site-footer {
+            border-top: 1px solid var(--line);
+            padding: 24px 0;
+            color: var(--muted);
+            background: var(--paper);
+        }
+
+        .footer-inner {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+            font-size: 14px;
+        }
+
+        @media (max-width: 980px) {
+            .hero,
+            .overview {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .nav {
+                align-items: flex-start;
+                gap: 14px;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .page {
+                padding: 26px 0 48px;
+            }
+
+            .key-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="主导航">
+            <a class="brand" href="/">
+                <span class="brand-mark" aria-hidden="true">智</span>
+                <span>智化推</span>
+            </a>
+            <div class="nav-links">
+                <a href="/">首页</a>
+                <a href="/generator">视频生成</a>
+                <a href="/login">登录</a>
+                <a href="/library">素材库</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page">
+        <section class="hero" aria-labelledby="profile-title">
+            <div>
+                <p class="eyebrow">用户中心</p>
+                <h1 id="profile-title">华澄新材营销协同台</h1>
+                <p>华澄新材（苏州）有限公司专注于水性聚氨酯分散体、环保型阻燃助剂与高附着力工业涂层树脂，服务新能源汽车、建筑节能、电子封装与高端包装材料客户。</p>
+                <div class="hero-actions">
+                    <a class="button" href="/generator">继续生成视频</a>
+                    <a class="button secondary" href="/library">进入素材库</a>
+                </div>
+            </div>
+            <aside class="hero-side" aria-label="账户摘要">
+                <div class="stat-card">
+                    <strong>108 / 150</strong>
+                    <span>本月视频额度已使用</span>
+                </div>
+                <div class="stat-card">
+                    <strong>6 条</strong>
+                    <span>待审批对外发布内容</span>
+                </div>
+                <div class="stat-card">
+                    <strong>23 套</strong>
+                    <span>常用行业模板已收藏</span>
+                </div>
+            </aside>
+        </section>
+
+        <section class="overview">
+            <aside class="panel company-card" aria-label="企业信息">
+                <div class="logo-mark" aria-hidden="true">澄</div>
+                <div>
+                    <h2 style="margin: 0;">华澄新材（苏州）有限公司</h2>
+                    <p style="margin-top: 10px; color: var(--muted);">国家级高新技术企业，聚焦绿色树脂、涂层助剂和功能性新材料的市场传播与技术展示。</p>
+                </div>
+                <div class="meta-list">
+                    <div><strong>地区：</strong>江苏苏州工业园区</div>
+                    <div><strong>行业认证：</strong>ISO 9001、ISO 14001、REACH 合规档案齐备</div>
+                    <div><strong>服务行业：</strong>建筑节能、工业包装、电子材料、轨道交通</div>
+                    <div><strong>联系人：</strong>市场中心 周岚 · 0512-6688 2190</div>
+                </div>
+                <div class="chip-row">
+                    <span class="chip">水性聚氨酯</span>
+                    <span class="chip">阻燃助剂</span>
+                    <span class="chip">工业树脂</span>
+                    <span class="chip">OEM 客户宣讲</span>
+                </div>
+            </aside>
+
+            <section class="panel" aria-label="用户中心内容">
+                <div class="section-top">
+                    <div>
+                        <h2>账号概览</h2>
+                        <p style="margin: 8px 0 0; color: var(--muted);">演示账号：<span id="demoAccount">market@huachengchem.com</span></p>
+                    </div>
+                    <div class="tabs" role="tablist" aria-label="内容分组">
+                        <button class="tab-btn active" type="button" data-tab="account">企业信息</button>
+                        <button class="tab-btn" type="button" data-tab="records">生成记录</button>
+                        <button class="tab-btn" type="button" data-tab="templates">常用模板</button>
+                        <button class="tab-btn" type="button" data-tab="approvals">通知审批</button>
+                    </div>
+                </div>
+
+                <div class="tab-panel active" data-panel="account">
+                    <article class="section-card">
+                        <div class="section-top">
+                            <h3>企业资料</h3>
+                            <button class="button secondary edit-trigger" type="button" data-title="编辑企业资料">编辑资料</button>
+                        </div>
+                        <div class="key-grid">
+                            <div><strong>企业简称</strong>华澄新材</div>
+                            <div><strong>品牌宣传语</strong>让功能材料表达得更清楚</div>
+                            <div><strong>主营产品</strong>水性聚氨酯分散体、无卤阻燃助剂、耐候工业树脂</div>
+                            <div><strong>目标客户</strong>涂料厂、复合材料厂、汽车零部件供应商</div>
+                            <div><strong>海外市场</strong>东南亚、日韩、中东样品推广</div>
+                            <div><strong>模板偏好</strong>技术对比型、展会邀约型、案例展示型</div>
+                        </div>
+                    </article>
+
+                    <article class="section-card">
+                        <div class="section-top">
+                            <h3>套餐与额度</h3>
+                            <button class="button secondary edit-trigger" type="button" data-title="升级套餐">升级套餐</button>
+                        </div>
+                        <div class="key-grid">
+                            <div><strong>当前套餐</strong>企业专业版</div>
+                            <div><strong>到期时间</strong>2026 年 12 月 31 日</div>
+                            <div><strong>剩余视频额度</strong>42 条</div>
+                            <div><strong>附加权益</strong>品牌资产库、审批流演示、子账号 12 个</div>
+                        </div>
+                        <div class="usage-bar">
+                            <div class="usage-track" aria-label="额度使用进度">
+                                <div class="usage-fill"></div>
+                            </div>
+                            <p style="margin-top: 10px; color: var(--muted);">本月已生成 108 条视频草稿，市场部与销售支持共使用 72% 月度额度。</p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="tab-panel" data-panel="records">
+                    <div class="filter-row" style="margin-bottom: 16px;">
+                        <button class="filter-btn active" type="button">全部</button>
+                        <button class="filter-btn" type="button">已完成</button>
+                        <button class="filter-btn" type="button">待修改</button>
+                        <button class="filter-btn" type="button">审批中</button>
+                    </div>
+                    <div class="list">
+                        <article class="record">
+                            <div class="section-top">
+                                <h3>水性聚氨酯分散体展会邀约版</h3>
+                                <span class="status ok">已完成</span>
+                            </div>
+                            <div class="record-meta">
+                                <span>生成时间：2026-04-29 15:42</span>
+                                <span>模板：展会邀约</span>
+                                <span>用途：CHINACOAT 客户预热</span>
+                            </div>
+                        </article>
+                        <article class="record">
+                            <div class="section-top">
+                                <h3>无卤阻燃助剂技术对比版</h3>
+                                <span class="status warn">审批中</span>
+                            </div>
+                            <div class="record-meta">
+                                <span>生成时间：2026-04-28 11:08</span>
+                                <span>模板：性能对比</span>
+                                <span>说明：待法务确认数据表述</span>
+                            </div>
+                        </article>
+                        <article class="record">
+                            <div class="section-top">
+                                <h3>工业包装树脂客户案例版</h3>
+                                <span class="status wait">待修改</span>
+                            </div>
+                            <div class="record-meta">
+                                <span>生成时间：2026-04-27 18:20</span>
+                                <span>模板：客户案例</span>
+                                <span>说明：建议替换客户现场图</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="tab-panel" data-panel="templates">
+                    <div class="list">
+                        <article class="template-card">
+                            <div class="section-top">
+                                <h3>技术参数强化型</h3>
+                                <button class="button secondary edit-trigger" type="button" data-title="编辑模板偏好">设为默认</button>
+                            </div>
+                            <div class="template-meta">
+                                <span>适用品类：助剂 / 树脂 / 功能母料</span>
+                                <span>近 30 天调用：18 次</span>
+                                <span>推荐原因：适合技术销售跟进</span>
+                            </div>
+                        </article>
+                        <article class="template-card">
+                            <div class="section-top">
+                                <h3>展会客户邀约型</h3>
+                                <button class="button secondary edit-trigger" type="button" data-title="申请模板扩展">申请扩展</button>
+                            </div>
+                            <div class="template-meta">
+                                <span>适用场景：展会前邀约、客户签到提醒</span>
+                                <span>近 30 天调用：12 次</span>
+                                <span>推荐原因：支持地图和展位信息展示</span>
+                            </div>
+                        </article>
+                        <article class="template-card">
+                            <div class="section-top">
+                                <h3>案例证明型</h3>
+                                <button class="button secondary edit-trigger" type="button" data-title="打开模板说明">查看说明</button>
+                            </div>
+                            <div class="template-meta">
+                                <span>适用场景：项目复盘、客户行业背书</span>
+                                <span>近 30 天调用：9 次</span>
+                                <span>推荐原因：可搭配工厂图与应用场景图</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="tab-panel" data-panel="approvals">
+                    <div class="filter-row" style="margin-bottom: 16px;">
+                        <button class="filter-btn active" type="button">全部通知</button>
+                        <button class="filter-btn" type="button">待确认</button>
+                        <button class="filter-btn" type="button">已通过</button>
+                        <button class="filter-btn" type="button">退回修改</button>
+                    </div>
+                    <div class="list">
+                        <article class="approval-card">
+                            <div class="section-top">
+                                <h3>无卤阻燃助剂技术对比版待法务确认</h3>
+                                <button class="button secondary collapse-trigger" type="button">展开详情</button>
+                            </div>
+                            <div class="approval-meta">
+                                <span>节点：法务审批</span>
+                                <span>责任人：王祎</span>
+                                <span class="status warn">待确认</span>
+                            </div>
+                            <div class="collapse-body">
+                                当前卡片中的“阻燃效率提升 27%”为样例数据，演示环境建议保留但正式发布需替换为审定版本。
+                            </div>
+                        </article>
+                        <article class="approval-card">
+                            <div class="section-top">
+                                <h3>CHINACOAT 展会邀约视频已通过市场总监审批</h3>
+                                <button class="button secondary collapse-trigger" type="button">展开详情</button>
+                            </div>
+                            <div class="approval-meta">
+                                <span>节点：市场总监</span>
+                                <span>责任人：周岚</span>
+                                <span class="status ok">已通过</span>
+                            </div>
+                            <div class="collapse-body">
+                                可直接下载外发，也可以进入素材库选择展位图重新生成区域版本。
+                            </div>
+                        </article>
+                        <article class="approval-card">
+                            <div class="section-top">
+                                <h3>工业包装树脂案例版被退回修改</h3>
+                                <button class="button secondary collapse-trigger" type="button">展开详情</button>
+                            </div>
+                            <div class="approval-meta">
+                                <span>节点：销售负责人</span>
+                                <span>责任人：陆骁</span>
+                                <span class="status wait">退回修改</span>
+                            </div>
+                            <div class="collapse-body">
+                                需要替换客户现场图并弱化未公开客户名称，修改后可重新提交审批。
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <div class="dialog-backdrop" id="dialogBackdrop" aria-hidden="true">
+        <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+            <h2 id="dialogTitle">演示操作</h2>
+            <p id="dialogText">此处仅展示前端交互，不会保存到服务器。</p>
+            <div class="dialog-actions">
+                <button class="button secondary" type="button" id="dialogClose">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">智化推 · 用户中心为演示页面，不连接真实账号体系。</div>
+    </footer>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const demoAccount = params.get('demoAccount');
+        if (demoAccount) {
+            document.getElementById('demoAccount').textContent = demoAccount;
+        }
+
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+        tabButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const target = button.dataset.tab;
+                tabButtons.forEach((item) => item.classList.remove('active'));
+                tabPanels.forEach((panel) => panel.classList.toggle('active', panel.dataset.panel === target));
+                button.classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('.filter-row').forEach((group) => {
+            const buttons = group.querySelectorAll('.filter-btn');
+            buttons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    buttons.forEach((item) => item.classList.remove('active'));
+                    button.classList.add('active');
+                });
+            });
+        });
+
+        document.querySelectorAll('.collapse-trigger').forEach((button) => {
+            button.addEventListener('click', () => {
+                const card = button.closest('.approval-card');
+                const open = card.classList.toggle('open');
+                button.textContent = open ? '收起详情' : '展开详情';
+            });
+        });
+
+        const dialogBackdrop = document.getElementById('dialogBackdrop');
+        const dialogTitle = document.getElementById('dialogTitle');
+        const dialogText = document.getElementById('dialogText');
+
+        document.querySelectorAll('.edit-trigger').forEach((button) => {
+            button.addEventListener('click', () => {
+                dialogTitle.textContent = button.dataset.title;
+                dialogText.textContent = '这是一个演示弹层，用于展示资料编辑、套餐升级或模板配置等交互，不会写入任何真实数据。';
+                dialogBackdrop.classList.add('open');
+            });
+        });
+
+        document.getElementById('dialogClose').addEventListener('click', () => {
+            dialogBackdrop.classList.remove('open');
+        });
+
+        dialogBackdrop.addEventListener('click', (event) => {
+            if (event.target === dialogBackdrop) {
+                dialogBackdrop.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>

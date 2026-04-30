@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智化推 - 素材库</title>
+    <style>
+        :root {
+            --ink: #1d1f21;
+            --muted: #5d646b;
+            --line: #d7dde2;
+            --paper: #f7f9f8;
+            --white: #ffffff;
+            --green: #1f7a55;
+            --green-dark: #11543a;
+            --red: #c83232;
+            --gold: #d8a02a;
+            --shadow: 0 18px 45px rgba(29, 31, 33, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--paper);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: min(1200px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 14px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .brand-mark {
+            display: inline-grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            color: var(--white);
+            background: var(--green);
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0 18px;
+            border: 1px solid var(--green);
+            border-radius: 8px;
+            background: var(--green);
+            color: var(--white);
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .button.secondary {
+            background: var(--white);
+            color: var(--green-dark);
+        }
+
+        .page {
+            width: min(1200px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 34px 0 72px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 320px;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .hero-card,
+        .summary-card,
+        .toolbar,
+        .asset-card,
+        .batch-bar,
+        .modal-card {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-card {
+            padding: clamp(24px, 4vw, 38px);
+            background:
+                linear-gradient(135deg, rgba(247, 249, 248, 0.95), rgba(247, 249, 248, 0.9)),
+                url("/static/hero-chem.svg") center / cover;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 14px;
+            color: var(--green-dark);
+            font-weight: 800;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 28px;
+            height: 3px;
+            border-radius: 3px;
+            background: var(--red);
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0;
+        }
+
+        h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            line-height: 1.1;
+        }
+
+        .hero-card p {
+            margin-top: 14px;
+            max-width: 760px;
+            color: var(--muted);
+        }
+
+        .tag-row,
+        .meta-row,
+        .toolbar-row,
+        .batch-actions,
+        .asset-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            min-height: 32px;
+            padding: 0 12px;
+            border-radius: 999px;
+            background: #eff7f3;
+            color: var(--green-dark);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .tag-row {
+            margin-top: 22px;
+        }
+
+        .meta-row {
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .summary-card {
+            padding: 22px;
+        }
+
+        .summary-grid {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .summary-item {
+            padding: 14px;
+            border-radius: 8px;
+            background: #f5f8f6;
+        }
+
+        .summary-item strong {
+            display: block;
+            color: var(--green-dark);
+            font-size: 22px;
+        }
+
+        .summary-item span {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .toolbar {
+            padding: 18px;
+        }
+
+        .toolbar-row {
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: minmax(220px, 1fr) 180px 180px auto;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        input[type="search"],
+        select {
+            width: 100%;
+            min-height: 44px;
+            padding: 0 14px;
+            border: 1px solid #c7d0d7;
+            border-radius: 8px;
+            background: var(--white);
+            color: var(--ink);
+        }
+
+        input[type="search"]:focus,
+        select:focus {
+            outline: 3px solid rgba(31, 122, 85, 0.18);
+            border-color: var(--green);
+        }
+
+        .assets-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 24px;
+        }
+
+        .asset-card {
+            overflow: hidden;
+        }
+
+        .asset-cover {
+            display: grid;
+            place-items: center;
+            min-height: 180px;
+            padding: 22px;
+            background: linear-gradient(135deg, #edf3ef, #dbe8e1);
+            color: var(--green-dark);
+            font-size: 22px;
+            font-weight: 900;
+            text-align: center;
+        }
+
+        .asset-body {
+            padding: 18px;
+        }
+
+        .asset-body h3 {
+            font-size: 20px;
+        }
+
+        .asset-desc {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .asset-meta {
+            display: grid;
+            gap: 8px;
+            margin-top: 14px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .asset-actions {
+            margin-top: 16px;
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .checkbox-row input {
+            width: 18px;
+            height: 18px;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            min-height: 30px;
+            padding: 0 10px;
+            border-radius: 999px;
+            background: #eff7f3;
+            color: var(--green-dark);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .status.pending {
+            background: #fff5df;
+            color: #8d6211;
+        }
+
+        .batch-bar {
+            position: sticky;
+            bottom: 20px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-top: 20px;
+            padding: 16px 18px;
+        }
+
+        .batch-bar.show {
+            display: flex;
+        }
+
+        .empty-state {
+            display: none;
+            margin-top: 24px;
+            padding: 28px;
+            border: 1px dashed var(--line);
+            border-radius: 8px;
+            color: var(--muted);
+            background: #fbfcfb;
+            text-align: center;
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(17, 20, 22, 0.42);
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal-card {
+            width: min(680px, 100%);
+            padding: 24px;
+        }
+
+        .modal-preview {
+            display: grid;
+            place-items: center;
+            min-height: 220px;
+            margin-top: 16px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #edf3ef, #dbe8e1);
+            color: var(--green-dark);
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .site-footer {
+            border-top: 1px solid var(--line);
+            padding: 24px 0;
+            color: var(--muted);
+            background: var(--paper);
+        }
+
+        .footer-inner {
+            width: min(1200px, calc(100% - 32px));
+            margin: 0 auto;
+            font-size: 14px;
+        }
+
+        @media (max-width: 1080px) {
+            .hero,
+            .assets-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+            .nav {
+                align-items: flex-start;
+                gap: 14px;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .page {
+                padding: 26px 0 48px;
+            }
+
+            .controls,
+            .assets-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .batch-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="主导航">
+            <a class="brand" href="/">
+                <span class="brand-mark" aria-hidden="true">智</span>
+                <span>智化推</span>
+            </a>
+            <div class="nav-links">
+                <a href="/">首页</a>
+                <a href="/generator">视频生成</a>
+                <a href="/login">登录</a>
+                <a href="/profile">用户中心</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page">
+        <section class="hero">
+            <article class="hero-card" aria-labelledby="library-title">
+                <p class="eyebrow">企业素材库</p>
+                <h1 id="library-title">华澄新材品牌素材统一管理</h1>
+                <p>面向市场部、销售支持与产品经理的内部资产演示页。集中展示企业 Logo、产品图、应用场景图、工厂图、宣传文案与介绍资料，支持前端模拟筛选、预览和批量操作。</p>
+                <div class="tag-row">
+                    <span class="tag">主营产品：水性聚氨酯</span>
+                    <span class="tag">品牌色：松柏绿 / 琥珀金</span>
+                    <span class="tag">宣传语：让功能材料表达得更清楚</span>
+                </div>
+                <div class="meta-row">
+                    <span>企业简介：服务涂料、包装、汽车与电子材料客户的功能性新材料供应商。</span>
+                </div>
+            </article>
+
+            <aside class="summary-card" aria-label="素材汇总">
+                <h2>素材概况</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <strong>64 份</strong>
+                        <span>当前演示素材总数</span>
+                    </div>
+                    <div class="summary-item">
+                        <strong>19 份</strong>
+                        <span>产品图与应用图</span>
+                    </div>
+                    <div class="summary-item">
+                        <strong>12 份</strong>
+                        <span>宣传文案与介绍资料</span>
+                    </div>
+                    <div class="summary-item">
+                        <strong>4 条</strong>
+                        <span>待审核新上传内容</span>
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+        <section class="toolbar" aria-label="筛选工具栏">
+            <div class="toolbar-row">
+                <div>
+                    <h2>素材列表</h2>
+                    <p style="margin-top: 6px; color: var(--muted);">可按分类、关键词和使用热度查看演示素材。</p>
+                </div>
+                <button class="button" type="button" id="uploadBtn">上传素材</button>
+            </div>
+            <div class="controls">
+                <input type="search" id="searchInput" placeholder="搜索素材名称、标签或适用模板">
+                <select id="categoryFilter">
+                    <option value="全部">全部分类</option>
+                    <option value="企业 Logo">企业 Logo</option>
+                    <option value="产品图">产品图</option>
+                    <option value="应用场景图">应用场景图</option>
+                    <option value="工厂/车间图">工厂/车间图</option>
+                    <option value="宣传文案">宣传文案</option>
+                    <option value="企业介绍资料">企业介绍资料</option>
+                </select>
+                <select id="sortSelect">
+                    <option value="latest">按上传时间排序</option>
+                    <option value="usage">按使用次数排序</option>
+                    <option value="name">按名称排序</option>
+                </select>
+                <button class="button secondary" type="button" id="clearFilters">清空筛选</button>
+            </div>
+        </section>
+
+        <section id="assetsGrid" class="assets-grid" aria-label="素材卡片列表"></section>
+        <div id="emptyState" class="empty-state">未找到符合条件的演示素材，请调整关键词或分类筛选。</div>
+
+        <section id="batchBar" class="batch-bar" aria-label="批量操作栏">
+            <div id="batchText">已选择 0 份素材</div>
+            <div class="batch-actions">
+                <button class="button secondary" type="button" data-batch="template">批量加入模板</button>
+                <button class="button secondary" type="button" data-batch="export">导出清单</button>
+                <button class="button secondary" type="button" data-batch="review">发起审核</button>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <h2 id="modalTitle">素材预览</h2>
+            <p id="modalMeta" style="margin-top: 10px; color: var(--muted);"></p>
+            <div class="modal-preview" id="modalPreview"></div>
+            <p id="modalDesc" style="margin-top: 16px; color: var(--muted);"></p>
+            <div class="modal-actions">
+                <button class="button secondary" type="button" id="modalClose">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">智化推 · 素材库仅为前端演示，上传、批量处理与审核不会持久化。</div>
+    </footer>
+
+    <script>
+        const assets = [
+            { id: 1, name: '华澄新材标准 Logo', category: '企业 Logo', uploadedAt: '2026-04-29', usage: 38, template: '品牌露出型', status: '已审核', tag: '推荐', desc: '适合视频收尾与封面角标使用。', cover: 'HC LOGO' },
+            { id: 2, name: '水性聚氨酯分散体产品图 A', category: '产品图', uploadedAt: '2026-04-27', usage: 22, template: '技术参数强化型', status: '已审核', tag: '热用', desc: '白底包装图，适合技术型讲解视频。', cover: '产品图 A' },
+            { id: 3, name: '无卤阻燃助剂应用场景', category: '应用场景图', uploadedAt: '2026-04-25', usage: 17, template: '案例证明型', status: '已审核', tag: '新能源', desc: '新能源汽车内饰阻燃材料应用示意。', cover: '应用场景' },
+            { id: 4, name: '苏州工厂外景航拍', category: '工厂/车间图', uploadedAt: '2026-04-24', usage: 9, template: '企业介绍型', status: '待审核', tag: '工厂形象', desc: '适合企业实力展示或客户接待片头。', cover: '工厂外景' },
+            { id: 5, name: 'CHINACOAT 展会邀约文案', category: '宣传文案', uploadedAt: '2026-04-28', usage: 14, template: '展会邀约型', status: '已审核', tag: '展会', desc: '含展位号、时间与客户邀约话术。', cover: '文案稿' },
+            { id: 6, name: '企业介绍 PDF 摘要版', category: '企业介绍资料', uploadedAt: '2026-04-21', usage: 11, template: '企业介绍型', status: '已审核', tag: '资料包', desc: '适合销售发送给新客户的介绍资料摘要。', cover: 'PDF 简介' },
+            { id: 7, name: '耐候工业树脂产品图 B', category: '产品图', uploadedAt: '2026-04-30', usage: 7, template: '客户案例型', status: '已审核', tag: '新品', desc: '新版包装产品图，适合案例与性能对比。', cover: '产品图 B' },
+            { id: 8, name: '电子封装客户产线图', category: '工厂/车间图', uploadedAt: '2026-04-23', usage: 6, template: '案例证明型', status: '待审核', tag: '客户现场', desc: '用于电子封装材料场景化演示。', cover: '产线图' },
+            { id: 9, name: '建筑保温应用主视觉', category: '应用场景图', uploadedAt: '2026-04-26', usage: 19, template: '应用痛点型', status: '已审核', tag: '建筑', desc: '保温板与施工现场组合图，适合开场痛点。', cover: '保温应用' }
+        ];
+
+        const assetsGrid = document.getElementById('assetsGrid');
+        const emptyState = document.getElementById('emptyState');
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const sortSelect = document.getElementById('sortSelect');
+        const clearFilters = document.getElementById('clearFilters');
+        const batchBar = document.getElementById('batchBar');
+        const batchText = document.getElementById('batchText');
+        const modalBackdrop = document.getElementById('modalBackdrop');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMeta = document.getElementById('modalMeta');
+        const modalPreview = document.getElementById('modalPreview');
+        const modalDesc = document.getElementById('modalDesc');
+
+        const selectedIds = new Set();
+
+        function getFilteredAssets() {
+            const keyword = searchInput.value.trim().toLowerCase();
+            const category = categoryFilter.value;
+            const sort = sortSelect.value;
+
+            const filtered = assets.filter((asset) => {
+                const matchKeyword = keyword === '' || [
+                    asset.name,
+                    asset.category,
+                    asset.template,
+                    asset.tag,
+                    asset.desc
+                ].join(' ').toLowerCase().includes(keyword);
+                const matchCategory = category === '全部' || asset.category === category;
+                return matchKeyword && matchCategory;
+            });
+
+            filtered.sort((a, b) => {
+                if (sort === 'usage') {
+                    return b.usage - a.usage;
+                }
+                if (sort === 'name') {
+                    return a.name.localeCompare(b.name, 'zh-CN');
+                }
+                return b.uploadedAt.localeCompare(a.uploadedAt);
+            });
+
+            return filtered;
+        }
+
+        function renderAssets() {
+            const filtered = getFilteredAssets();
+            assetsGrid.innerHTML = '';
+
+            filtered.forEach((asset) => {
+                const card = document.createElement('article');
+                card.className = 'asset-card';
+                const statusClass = asset.status === '待审核' ? 'status pending' : 'status';
+                const checked = selectedIds.has(asset.id) ? 'checked' : '';
+                card.innerHTML = `
+                    <div class="asset-cover">${asset.cover}</div>
+                    <div class="asset-body">
+                        <div class="checkbox-row">
+                            <input type="checkbox" data-select="${asset.id}" ${checked}>
+                            <span>选择素材用于批量操作</span>
+                        </div>
+                        <h3>${asset.name}</h3>
+                        <p class="asset-desc">${asset.desc}</p>
+                        <div class="asset-meta">
+                            <span>分类：${asset.category}</span>
+                            <span>上传时间：${asset.uploadedAt}</span>
+                            <span>使用次数：${asset.usage} 次</span>
+                            <span>适用模板：${asset.template}</span>
+                            <span>推荐标签：${asset.tag}</span>
+                            <span>审核状态：<span class="${statusClass}">${asset.status}</span></span>
+                        </div>
+                        <div class="asset-actions">
+                            <button class="button secondary" type="button" data-preview="${asset.id}">预览</button>
+                            <button class="button secondary" type="button" data-use="${asset.id}">用于视频生成</button>
+                        </div>
+                    </div>
+                `;
+                assetsGrid.appendChild(card);
+            });
+
+            emptyState.style.display = filtered.length === 0 ? 'block' : 'none';
+
+            document.querySelectorAll('[data-select]').forEach((checkbox) => {
+                checkbox.addEventListener('change', () => {
+                    const id = Number(checkbox.dataset.select);
+                    if (checkbox.checked) {
+                        selectedIds.add(id);
+                    } else {
+                        selectedIds.delete(id);
+                    }
+                    updateBatchBar();
+                });
+            });
+
+            document.querySelectorAll('[data-preview]').forEach((button) => {
+                button.addEventListener('click', () => openPreview(Number(button.dataset.preview)));
+            });
+
+            document.querySelectorAll('[data-use]').forEach((button) => {
+                button.addEventListener('click', () => {
+                    const asset = assets.find((item) => item.id === Number(button.dataset.use));
+                    window.alert(`演示提示：已将“${asset.name}”加入待生成素材清单，正式版可跳转到视频生成页。`);
+                });
+            });
+        }
+
+        function updateBatchBar() {
+            const count = selectedIds.size;
+            batchText.textContent = `已选择 ${count} 份素材`;
+            batchBar.classList.toggle('show', count > 0);
+        }
+
+        function openPreview(id) {
+            const asset = assets.find((item) => item.id === id);
+            if (!asset) {
+                return;
+            }
+            modalTitle.textContent = asset.name;
+            modalMeta.textContent = `${asset.category} · 上传于 ${asset.uploadedAt} · 使用 ${asset.usage} 次`;
+            modalPreview.textContent = asset.cover;
+            modalDesc.textContent = `${asset.desc} 适用模板：${asset.template}。当前状态：${asset.status}。`;
+            modalBackdrop.classList.add('open');
+        }
+
+        searchInput.addEventListener('input', renderAssets);
+        categoryFilter.addEventListener('change', renderAssets);
+        sortSelect.addEventListener('change', renderAssets);
+
+        clearFilters.addEventListener('click', () => {
+            searchInput.value = '';
+            categoryFilter.value = '全部';
+            sortSelect.value = 'latest';
+            renderAssets();
+        });
+
+        document.getElementById('uploadBtn').addEventListener('click', () => {
+            modalTitle.textContent = '上传素材';
+            modalMeta.textContent = '演示交互：不会真正上传文件。';
+            modalPreview.textContent = '上传窗口';
+            modalDesc.textContent = '正式版本可在这里接入文件上传、标签配置、素材审核与去重校验流程。';
+            modalBackdrop.classList.add('open');
+        });
+
+        document.querySelectorAll('[data-batch]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const actionMap = {
+                    template: '已模拟将选中素材加入模板素材池，不会保存到服务器。',
+                    export: '已模拟导出选中素材清单，可在正式版生成 Excel 或 PDF。',
+                    review: '已模拟发起审核流程，正式版可配置审批节点。'
+                };
+                window.alert(actionMap[button.dataset.batch]);
+            });
+        });
+
+        document.getElementById('modalClose').addEventListener('click', () => {
+            modalBackdrop.classList.remove('open');
+        });
+
+        modalBackdrop.addEventListener('click', (event) => {
+            if (event.target === modalBackdrop) {
+                modalBackdrop.classList.remove('open');
+            }
+        });
+
+        renderAssets();
+        updateBatchBar();
+    </script>
+</body>
+</html>

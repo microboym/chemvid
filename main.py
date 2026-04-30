@@ -23,6 +23,18 @@ def serve_index():
 def serve_generator():
     return FileResponse("static/generator.html")
 
+@app.get("/login")
+def serve_login():
+    return FileResponse("static/login.html")
+
+@app.get("/profile")
+def serve_profile():
+    return FileResponse("static/profile.html")
+
+@app.get("/library")
+def serve_library():
+    return FileResponse("static/library.html")
+
 @app.post("/api/generate")
 async def generate_video(
     background_tasks: BackgroundTasks,
