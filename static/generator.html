@@ -43,6 +43,12 @@
             border-bottom: 1px solid var(--line);
             background: rgba(255, 255, 255, 0.94);
             backdrop-filter: blur(10px);
+            transition: background 0.25s ease, border-color 0.25s ease;
+        }
+
+        .session-active .site-header {
+            border-bottom-color: #0f4e35;
+            background: rgba(17, 84, 58, 0.94);
         }
 
         .nav {
@@ -61,6 +67,7 @@
             font-weight: 800;
             font-size: 20px;
             text-decoration: none;
+            transition: color 0.25s ease;
         }
 
         .brand-mark {
@@ -80,10 +87,16 @@
             gap: 18px;
             color: var(--muted);
             font-size: 15px;
+            transition: color 0.25s ease;
         }
 
         .nav-links a {
             text-decoration: none;
+        }
+
+        .session-active .brand,
+        .session-active .nav-links {
+            color: rgba(255, 255, 255, 0.88);
         }
 
         .page {
@@ -157,6 +170,18 @@
         .button.secondary {
             background: var(--white);
             color: var(--green-dark);
+        }
+
+        .nav-login {
+            min-width: 124px;
+            box-shadow: 0 12px 24px rgba(31, 122, 85, 0.18);
+        }
+
+        .session-active .nav-login {
+            border-color: rgba(255, 255, 255, 0.42);
+            background: rgba(255, 255, 255, 0.14);
+            color: var(--white);
+            box-shadow: none;
         }
 
         .button:disabled {
@@ -464,10 +489,11 @@
             </a>
             <div class="nav-links">
                 <a href="/">返回首页</a>
-                <a href="/login">登录</a>
                 <a href="/profile">用户中心</a>
+                <a href="/company-template">企业模板</a>
                 <a href="/library">素材库</a>
                 <a href="/static/manual.pdf">使用手册</a>
+                <a class="button nav-login" href="/login" data-login-link>企业登录</a>
             </div>
         </nav>
     </header>
@@ -608,12 +634,33 @@
     </main>
 
     <script>
+        const sessionKey = 'chemvidDemoSession';
+        const accountKey = 'chemvidDemoAccount';
         const form = document.getElementById('videoForm');
         const submitBtn = document.getElementById('submitBtn');
         const loadingDiv = document.getElementById('loading');
         const videoContainer = document.getElementById('video-container');
         const resultVideo = document.getElementById('resultVideo');
         const downloadBtn = document.getElementById('downloadBtn');
+
+        (function applySessionNav() {
+            const loggedIn = localStorage.getItem(sessionKey) === 'active';
+            const loginLink = document.querySelector('[data-login-link]');
+            document.body.classList.toggle('session-active', loggedIn);
+            if (!loginLink) {
+                return;
+            }
+            if (loggedIn) {
+                loginLink.textContent = '退出登录';
+                loginLink.href = '/';
+                loginLink.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    localStorage.removeItem(sessionKey);
+                    localStorage.removeItem(accountKey);
+                    window.location.href = '/';
+                }, { once: true });
+            }
+        })();
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();

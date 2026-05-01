@@ -35,6 +35,10 @@ def serve_profile():
 def serve_library():
     return FileResponse("static/library.html")
 
+@app.get("/company-template")
+def serve_company_template():
+    return FileResponse("static/company-template.html")
+
 @app.post("/api/generate")
 async def generate_video(
     background_tasks: BackgroundTasks,

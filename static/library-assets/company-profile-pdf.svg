@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420">
+  <rect width="640" height="420" fill="#f2f3f7"/>
+  <rect x="130" y="42" width="270" height="336" rx="20" fill="#ffffff" stroke="#d7dde2" stroke-width="8"/>
+  <polygon points="344,42 400,98 400,42" fill="#dfe6ef"/>
+  <rect x="170" y="112" width="190" height="18" rx="9" fill="#dfe8e2"/>
+  <rect x="170" y="152" width="150" height="18" rx="9" fill="#dfe8e2"/>
+  <rect x="170" y="192" width="170" height="18" rx="9" fill="#dfe8e2"/>
+  <rect x="170" y="232" width="132" height="18" rx="9" fill="#dfe8e2"/>
+  <text x="434" y="162" fill="#33445c" font-size="38" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">企业介绍资料</text>
+  <text x="434" y="220" fill="#5d646b" font-size="24" font-family="PingFang SC, Microsoft YaHei, sans-serif">销售外发 PDF 摘要版</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420">
+  <rect width="640" height="420" fill="#edf1ec"/>
+  <rect x="0" y="290" width="640" height="130" fill="#cfd7c7"/>
+  <rect x="70" y="180" width="500" height="130" rx="16" fill="#87978b"/>
+  <rect x="114" y="124" width="130" height="60" rx="8" fill="#6d7f73"/>
+  <rect x="270" y="138" width="110" height="46" rx="8" fill="#6d7f73"/>
+  <rect x="412" y="112" width="140" height="72" rx="8" fill="#6d7f73"/>
+  <text x="62" y="78" fill="#2c4635" font-size="40" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">苏州工厂外景航拍</text>
+  <text x="62" y="344" fill="#4d5d53" font-size="24" font-family="PingFang SC, Microsoft YaHei, sans-serif">适合展示产能、交付能力与企业形象</text>
+</svg>

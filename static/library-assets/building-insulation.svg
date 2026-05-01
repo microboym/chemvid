@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420">
+  <rect width="640" height="420" fill="#eef4ef"/>
+  <rect x="98" y="92" width="190" height="248" rx="16" fill="#c2d4c2"/>
+  <rect x="128" y="122" width="130" height="188" rx="12" fill="#f5f8f5"/>
+  <rect x="356" y="136" width="176" height="168" rx="22" fill="#d5e4d7"/>
+  <path d="M388 252h110l-55-80-55 80Z" fill="#8bac91"/>
+  <text x="78" y="60" fill="#2d4d34" font-size="38" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">建筑保温应用主视觉</text>
+  <text x="322" y="352" fill="#556259" font-size="24" font-family="PingFang SC, Microsoft YaHei, sans-serif">适合作为开场痛点与应用场景图</text>
+</svg>

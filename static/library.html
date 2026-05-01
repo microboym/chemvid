@@ -47,6 +47,12 @@
             border-bottom: 1px solid var(--line);
             background: rgba(255, 255, 255, 0.94);
             backdrop-filter: blur(10px);
+            transition: background 0.25s ease, border-color 0.25s ease;
+        }
+
+        .session-active .site-header {
+            border-bottom-color: #0f4e35;
+            background: rgba(17, 84, 58, 0.94);
         }
 
         .nav {
@@ -65,6 +71,7 @@
             font-size: 20px;
             font-weight: 800;
             text-decoration: none;
+            transition: color 0.25s ease;
         }
 
         .brand-mark {
@@ -84,10 +91,16 @@
             gap: 18px;
             color: var(--muted);
             font-size: 15px;
+            transition: color 0.25s ease;
         }
 
         .nav-links a {
             text-decoration: none;
+        }
+
+        .session-active .brand,
+        .session-active .nav-links {
+            color: rgba(255, 255, 255, 0.88);
         }
 
         .button {
@@ -108,6 +121,18 @@
         .button.secondary {
             background: var(--white);
             color: var(--green-dark);
+        }
+
+        .nav-login {
+            min-width: 124px;
+            box-shadow: 0 12px 24px rgba(31, 122, 85, 0.18);
+        }
+
+        .session-active .nav-login {
+            border-color: rgba(255, 255, 255, 0.42);
+            background: rgba(255, 255, 255, 0.14);
+            color: var(--white);
+            box-shadow: none;
         }
 
         .page {
@@ -287,12 +312,16 @@
             display: grid;
             place-items: center;
             min-height: 180px;
-            padding: 22px;
+            overflow: hidden;
             background: linear-gradient(135deg, #edf3ef, #dbe8e1);
-            color: var(--green-dark);
-            font-size: 22px;
-            font-weight: 900;
-            text-align: center;
+        }
+
+        .asset-cover img,
+        .modal-preview img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .asset-body {
@@ -397,15 +426,11 @@
         }
 
         .modal-preview {
-            display: grid;
-            place-items: center;
             min-height: 220px;
             margin-top: 16px;
+            overflow: hidden;
             border-radius: 8px;
             background: linear-gradient(135deg, #edf3ef, #dbe8e1);
-            color: var(--green-dark);
-            font-size: 28px;
-            font-weight: 900;
         }
 
         .modal-actions {
@@ -485,8 +510,9 @@
             <div class="nav-links">
                 <a href="/">首页</a>
                 <a href="/generator">视频生成</a>
-                <a href="/login">登录</a>
                 <a href="/profile">用户中心</a>
+                <a href="/company-template">企业模板</a>
+                <a class="button nav-login" href="/login" data-login-link>企业登录</a>
             </div>
         </nav>
     </header>
@@ -588,16 +614,18 @@
     </footer>
 
     <script>
+        const sessionKey = 'chemvidDemoSession';
+        const accountKey = 'chemvidDemoAccount';
         const assets = [
-            { id: 1, name: '华澄新材标准 Logo', category: '企业 Logo', uploadedAt: '2026-04-29', usage: 38, template: '品牌露出型', status: '已审核', tag: '推荐', desc: '适合视频收尾与封面角标使用。', cover: 'HC LOGO' },
-            { id: 2, name: '水性聚氨酯分散体产品图 A', category: '产品图', uploadedAt: '2026-04-27', usage: 22, template: '技术参数强化型', status: '已审核', tag: '热用', desc: '白底包装图，适合技术型讲解视频。', cover: '产品图 A' },
-            { id: 3, name: '无卤阻燃助剂应用场景', category: '应用场景图', uploadedAt: '2026-04-25', usage: 17, template: '案例证明型', status: '已审核', tag: '新能源', desc: '新能源汽车内饰阻燃材料应用示意。', cover: '应用场景' },
-            { id: 4, name: '苏州工厂外景航拍', category: '工厂/车间图', uploadedAt: '2026-04-24', usage: 9, template: '企业介绍型', status: '待审核', tag: '工厂形象', desc: '适合企业实力展示或客户接待片头。', cover: '工厂外景' },
-            { id: 5, name: 'CHINACOAT 展会邀约文案', category: '宣传文案', uploadedAt: '2026-04-28', usage: 14, template: '展会邀约型', status: '已审核', tag: '展会', desc: '含展位号、时间与客户邀约话术。', cover: '文案稿' },
-            { id: 6, name: '企业介绍 PDF 摘要版', category: '企业介绍资料', uploadedAt: '2026-04-21', usage: 11, template: '企业介绍型', status: '已审核', tag: '资料包', desc: '适合销售发送给新客户的介绍资料摘要。', cover: 'PDF 简介' },
-            { id: 7, name: '耐候工业树脂产品图 B', category: '产品图', uploadedAt: '2026-04-30', usage: 7, template: '客户案例型', status: '已审核', tag: '新品', desc: '新版包装产品图，适合案例与性能对比。', cover: '产品图 B' },
-            { id: 8, name: '电子封装客户产线图', category: '工厂/车间图', uploadedAt: '2026-04-23', usage: 6, template: '案例证明型', status: '待审核', tag: '客户现场', desc: '用于电子封装材料场景化演示。', cover: '产线图' },
-            { id: 9, name: '建筑保温应用主视觉', category: '应用场景图', uploadedAt: '2026-04-26', usage: 19, template: '应用痛点型', status: '已审核', tag: '建筑', desc: '保温板与施工现场组合图，适合开场痛点。', cover: '保温应用' }
+            { id: 1, name: '华澄新材标准 Logo', category: '企业 Logo', uploadedAt: '2026-04-29', usage: 38, template: '品牌露出型', status: '已审核', tag: '推荐', desc: '适合视频收尾与封面角标使用。', image: '/static/library-assets/logo-standard.svg' },
+            { id: 2, name: '水性聚氨酯分散体产品图 A', category: '产品图', uploadedAt: '2026-04-27', usage: 22, template: '技术参数强化型', status: '已审核', tag: '热用', desc: '白底包装图，适合技术型讲解视频。', image: '/static/library-assets/product-dispersion-a.svg' },
+            { id: 3, name: '无卤阻燃助剂应用场景', category: '应用场景图', uploadedAt: '2026-04-25', usage: 17, template: '案例证明型', status: '已审核', tag: '新能源', desc: '新能源汽车内饰阻燃材料应用示意。', image: '/static/library-assets/application-flame-retardant.svg' },
+            { id: 4, name: '苏州工厂外景航拍', category: '工厂/车间图', uploadedAt: '2026-04-24', usage: 9, template: '企业介绍型', status: '待审核', tag: '工厂形象', desc: '适合企业实力展示或客户接待片头。', image: '/static/library-assets/factory-drone.svg' },
+            { id: 5, name: 'CHINACOAT 展会邀约文案', category: '宣传文案', uploadedAt: '2026-04-28', usage: 14, template: '展会邀约型', status: '已审核', tag: '展会', desc: '含展位号、时间与客户邀约话术。', image: '/static/library-assets/expo-copy.svg' },
+            { id: 6, name: '企业介绍 PDF 摘要版', category: '企业介绍资料', uploadedAt: '2026-04-21', usage: 11, template: '企业介绍型', status: '已审核', tag: '资料包', desc: '适合销售发送给新客户的介绍资料摘要。', image: '/static/library-assets/company-profile-pdf.svg' },
+            { id: 7, name: '耐候工业树脂产品图 B', category: '产品图', uploadedAt: '2026-04-30', usage: 7, template: '客户案例型', status: '已审核', tag: '新品', desc: '新版包装产品图，适合案例与性能对比。', image: '/static/library-assets/product-resin-b.svg' },
+            { id: 8, name: '电子封装客户产线图', category: '工厂/车间图', uploadedAt: '2026-04-23', usage: 6, template: '案例证明型', status: '待审核', tag: '客户现场', desc: '用于电子封装材料场景化演示。', image: '/static/library-assets/customer-line.svg' },
+            { id: 9, name: '建筑保温应用主视觉', category: '应用场景图', uploadedAt: '2026-04-26', usage: 19, template: '应用痛点型', status: '已审核', tag: '建筑', desc: '保温板与施工现场组合图，适合开场痛点。', image: '/static/library-assets/building-insulation.svg' }
         ];
 
         const assetsGrid = document.getElementById('assetsGrid');
@@ -615,6 +643,25 @@
         const modalDesc = document.getElementById('modalDesc');
 
         const selectedIds = new Set();
+
+        (function applySessionNav() {
+            const loggedIn = localStorage.getItem(sessionKey) === 'active';
+            const loginLink = document.querySelector('[data-login-link]');
+            document.body.classList.toggle('session-active', loggedIn);
+            if (!loginLink) {
+                return;
+            }
+            if (loggedIn) {
+                loginLink.textContent = '退出登录';
+                loginLink.href = '/';
+                loginLink.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    localStorage.removeItem(sessionKey);
+                    localStorage.removeItem(accountKey);
+                    window.location.href = '/';
+                }, { once: true });
+            }
+        })();
 
         function getFilteredAssets() {
             const keyword = searchInput.value.trim().toLowerCase();
@@ -656,7 +703,7 @@
                 const statusClass = asset.status === '待审核' ? 'status pending' : 'status';
                 const checked = selectedIds.has(asset.id) ? 'checked' : '';
                 card.innerHTML = `
-                    <div class="asset-cover">${asset.cover}</div>
+                    <div class="asset-cover"><img src="${asset.image}" alt="${asset.name}"></div>
                     <div class="asset-body">
                         <div class="checkbox-row">
                             <input type="checkbox" data-select="${asset.id}" ${checked}>
@@ -720,7 +767,7 @@
             }
             modalTitle.textContent = asset.name;
             modalMeta.textContent = `${asset.category} · 上传于 ${asset.uploadedAt} · 使用 ${asset.usage} 次`;
-            modalPreview.textContent = asset.cover;
+            modalPreview.innerHTML = `<img src="${asset.image}" alt="${asset.name}">`;
             modalDesc.textContent = `${asset.desc} 适用模板：${asset.template}。当前状态：${asset.status}。`;
             modalBackdrop.classList.add('open');
         }
@@ -739,7 +786,7 @@
         document.getElementById('uploadBtn').addEventListener('click', () => {
             modalTitle.textContent = '上传素材';
             modalMeta.textContent = '演示交互：不会真正上传文件。';
-            modalPreview.textContent = '上传窗口';
+            modalPreview.innerHTML = '<img src="/static/library-assets/logo-standard.svg" alt="上传素材预览">';
             modalDesc.textContent = '正式版本可在这里接入文件上传、标签配置、素材审核与去重校验流程。';
             modalBackdrop.classList.add('open');
         });

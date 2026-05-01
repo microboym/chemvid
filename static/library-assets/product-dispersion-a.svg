@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420">
+  <rect width="640" height="420" fill="#f7f9f8"/>
+  <rect x="62" y="58" width="220" height="304" rx="24" fill="#ffffff" stroke="#d7dde2" stroke-width="8"/>
+  <rect x="92" y="102" width="160" height="180" rx="18" fill="#dfece5"/>
+  <rect x="114" y="122" width="116" height="140" rx="16" fill="#1f7a55"/>
+  <text x="320" y="148" fill="#11543a" font-size="40" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">水性聚氨酯分散体 A</text>
+  <text x="320" y="210" fill="#56635d" font-size="24" font-family="PingFang SC, Microsoft YaHei, sans-serif">白底包装展示图 · 适合技术参数类视频</text>
+  <text x="320" y="258" fill="#1f7a55" font-size="24" font-family="PingFang SC, Microsoft YaHei, sans-serif">推荐模板：技术参数强化型</text>
+</svg>
