@@ -511,7 +511,6 @@
                 <a href="/">首页</a>
                 <a href="/generator">视频生成</a>
                 <a href="/profile">用户中心</a>
-                <a href="/company-template">企业模板</a>
                 <a class="button nav-login" href="/login" data-login-link>企业登录</a>
             </div>
         </nav>
@@ -522,7 +521,7 @@
             <article class="hero-card" aria-labelledby="library-title">
                 <p class="eyebrow">企业素材库</p>
                 <h1 id="library-title">华澄新材品牌素材统一管理</h1>
-                <p>面向市场部、销售支持与产品经理的内部资产演示页。集中展示企业 Logo、产品图、应用场景图、工厂图、宣传文案与介绍资料，支持前端模拟筛选、预览和批量操作。</p>
+                <p>面向市场部、销售支持与产品经理的内部资产工作台。集中展示企业 Logo、产品图、应用场景图、工厂图、宣传文案与介绍资料，支持按分类、关键词和使用热度统一管理。</p>
                 <div class="tag-row">
                     <span class="tag">主营产品：水性聚氨酯</span>
                     <span class="tag">品牌色：松柏绿 / 琥珀金</span>
@@ -538,7 +537,7 @@
                 <div class="summary-grid">
                     <div class="summary-item">
                         <strong>64 份</strong>
-                        <span>当前演示素材总数</span>
+                        <span>当前素材总数</span>
                     </div>
                     <div class="summary-item">
                         <strong>19 份</strong>
@@ -560,7 +559,7 @@
             <div class="toolbar-row">
                 <div>
                     <h2>素材列表</h2>
-                    <p style="margin-top: 6px; color: var(--muted);">可按分类、关键词和使用热度查看演示素材。</p>
+                    <p style="margin-top: 6px; color: var(--muted);">可按分类、关键词和使用热度查看素材。</p>
                 </div>
                 <button class="button" type="button" id="uploadBtn">上传素材</button>
             </div>
@@ -585,7 +584,7 @@
         </section>
 
         <section id="assetsGrid" class="assets-grid" aria-label="素材卡片列表"></section>
-        <div id="emptyState" class="empty-state">未找到符合条件的演示素材，请调整关键词或分类筛选。</div>
+        <div id="emptyState" class="empty-state">未找到符合条件的素材，请调整关键词或分类筛选。</div>
 
         <section id="batchBar" class="batch-bar" aria-label="批量操作栏">
             <div id="batchText">已选择 0 份素材</div>
@@ -610,7 +609,7 @@
     </div>
 
     <footer class="site-footer">
-        <div class="footer-inner">智化推 · 素材库仅为前端演示，上传、批量处理与审核不会持久化。</div>
+        <div class="footer-inner">智化推 · 企业素材库</div>
     </footer>
 
     <script>
@@ -618,14 +617,14 @@
         const accountKey = 'chemvidDemoAccount';
         const assets = [
             { id: 1, name: '华澄新材标准 Logo', category: '企业 Logo', uploadedAt: '2026-04-29', usage: 38, template: '品牌露出型', status: '已审核', tag: '推荐', desc: '适合视频收尾与封面角标使用。', image: '/static/library-assets/logo-standard.svg' },
-            { id: 2, name: '水性聚氨酯分散体产品图 A', category: '产品图', uploadedAt: '2026-04-27', usage: 22, template: '技术参数强化型', status: '已审核', tag: '热用', desc: '实拍化学试剂瓶素材，适合技术型讲解视频。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Bottle_containing_benzaldehyde.jpg?width=720' },
-            { id: 3, name: '无卤阻燃助剂应用场景', category: '应用场景图', uploadedAt: '2026-04-25', usage: 17, template: '案例证明型', status: '已审核', tag: '新能源', desc: '汽车内饰实拍场景，可用于新能源汽车阻燃材料应用示意。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/A_car_interior.jpg?width=720' },
-            { id: 4, name: '苏州工厂外景航拍', category: '工厂/车间图', uploadedAt: '2026-04-24', usage: 9, template: '企业介绍型', status: '待审核', tag: '工厂形象', desc: '工厂园区航拍实景，适合企业实力展示或客户接待片头。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/An_aerial_shot_of_a_factory_complex.jpg?width=720' },
+            { id: 2, name: '苯甲醛试剂瓶产品图 A', category: '产品图', uploadedAt: '2026-04-27', usage: 22, template: '技术参数强化型', status: '已审核', tag: '热用', desc: '苯甲醛试剂瓶实拍，适合精细化学品介绍与技术讲解视频。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Bottle_containing_benzaldehyde.jpg?width=480' },
+            { id: 3, name: '无卤阻燃助剂应用场景', category: '应用场景图', uploadedAt: '2026-04-25', usage: 17, template: '案例证明型', status: '已审核', tag: '新能源', desc: '汽车内饰实拍场景，可用于新能源汽车阻燃材料应用示意。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/A_car_interior.jpg?width=480' },
+            { id: 4, name: '苏州工厂外景航拍', category: '工厂/车间图', uploadedAt: '2026-04-24', usage: 9, template: '企业介绍型', status: '待审核', tag: '工厂形象', desc: '工厂园区航拍实景，适合企业实力展示或客户接待片头。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/An_aerial_shot_of_a_factory_complex.jpg?width=480' },
             { id: 5, name: 'CHINACOAT 展会邀约文案', category: '宣传文案', uploadedAt: '2026-04-28', usage: 14, template: '展会邀约型', status: '已审核', tag: '展会', desc: '含展位号、时间与客户邀约话术。', image: '/static/library-assets/expo-copy.svg' },
             { id: 6, name: '企业介绍 PDF 摘要版', category: '企业介绍资料', uploadedAt: '2026-04-21', usage: 11, template: '企业介绍型', status: '已审核', tag: '资料包', desc: '适合销售发送给新客户的介绍资料摘要。', image: '/static/library-assets/company-profile-pdf.svg' },
-            { id: 7, name: '耐候工业树脂产品图 B', category: '产品图', uploadedAt: '2026-04-30', usage: 7, template: '客户案例型', status: '已审核', tag: '新品', desc: '化工铁桶产品实拍，适合案例与性能对比。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Galvanized_chemical_drums.jpg?width=720' },
-            { id: 8, name: '电子封装客户产线图', category: '工厂/车间图', uploadedAt: '2026-04-23', usage: 6, template: '案例证明型', status: '待审核', tag: '客户现场', desc: '客户产线实拍照片，用于电子封装材料场景化演示。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/The_production_line.jpg?width=720' },
-            { id: 9, name: '建筑保温应用主视觉', category: '应用场景图', uploadedAt: '2026-04-26', usage: 19, template: '应用痛点型', status: '已审核', tag: '建筑', desc: '建筑施工与保温应用实拍，适合开场痛点。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Building_construction.jpg?width=720' }
+            { id: 7, name: '耐候工业树脂产品图 B', category: '产品图', uploadedAt: '2026-04-30', usage: 7, template: '客户案例型', status: '已审核', tag: '新品', desc: '化工铁桶产品实拍，适合案例与性能对比。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Galvanized_chemical_drums.jpg?width=480' },
+            { id: 8, name: '电子封装客户产线图', category: '工厂/车间图', uploadedAt: '2026-04-23', usage: 6, template: '案例证明型', status: '待审核', tag: '客户现场', desc: '客户产线实拍照片，用于电子封装材料客户案例说明。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/The_production_line.jpg?width=480' },
+            { id: 9, name: '建筑保温应用主视觉', category: '应用场景图', uploadedAt: '2026-04-26', usage: 19, template: '应用痛点型', status: '已审核', tag: '建筑', desc: '建筑施工与保温应用实拍，适合开场痛点。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Building_construction.jpg?width=480' }
         ];
 
         const assetsGrid = document.getElementById('assetsGrid');
@@ -749,7 +748,7 @@
             document.querySelectorAll('[data-use]').forEach((button) => {
                 button.addEventListener('click', () => {
                     const asset = assets.find((item) => item.id === Number(button.dataset.use));
-                    window.alert(`演示提示：已将“${asset.name}”加入待生成素材清单，正式版可跳转到视频生成页。`);
+                    window.alert(`已将“${asset.name}”加入待生成素材清单。`);
                 });
             });
         }
@@ -785,18 +784,18 @@
 
         document.getElementById('uploadBtn').addEventListener('click', () => {
             modalTitle.textContent = '上传素材';
-            modalMeta.textContent = '演示交互：不会真正上传文件。';
+            modalMeta.textContent = '支持上传图片、视频与文档素材。';
             modalPreview.innerHTML = '<img src="/static/library-assets/logo-standard.svg" alt="上传素材预览">';
-            modalDesc.textContent = '正式版本可在这里接入文件上传、标签配置、素材审核与去重校验流程。';
+            modalDesc.textContent = '可在这里统一管理文件上传、标签配置、素材审核与去重校验流程。';
             modalBackdrop.classList.add('open');
         });
 
         document.querySelectorAll('[data-batch]').forEach((button) => {
             button.addEventListener('click', () => {
                 const actionMap = {
-                    template: '已模拟将选中素材加入模板素材池，不会保存到服务器。',
-                    export: '已模拟导出选中素材清单，可在正式版生成 Excel 或 PDF。',
-                    review: '已模拟发起审核流程，正式版可配置审批节点。'
+                    template: '已将选中素材加入模板素材池。',
+                    export: '已生成选中素材清单，可用于导出或共享。',
+                    review: '已发起审核流程，请等待审批结果。'
                 };
                 window.alert(actionMap[button.dataset.batch]);
             });

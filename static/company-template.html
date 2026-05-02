@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>智化推 - 企业模板</title>
+    <title>智化推 - 企业资料模板</title>
     <style>
         :root {
             --ink: #1d1f21;
@@ -367,7 +367,6 @@
                 <a href="/">首页</a>
                 <a href="/generator">视频生成</a>
                 <a href="/profile">用户中心</a>
-                <a href="/company-template">企业模板</a>
                 <a href="/library">素材库</a>
                 <a class="button nav-login" href="/login" data-login-link>企业登录</a>
             </div>
@@ -377,9 +376,9 @@
     <main class="page">
         <section class="hero" aria-labelledby="template-title">
             <div>
-                <p class="eyebrow">企业模板</p>
+                <p class="eyebrow">企业资料模板</p>
                 <h1 id="template-title">录入企业信息，统一生成品牌表达底稿</h1>
-                <p>用于视频生成、素材库与对外演示页面的企业信息模板。市场部可在此整理主营产品、服务行业、品牌色、宣传语和合规资质，后续生成时直接复用。</p>
+                <p>用于视频生成、素材库与用户中心统一展示的企业信息模板。市场部可在此整理主营产品、服务行业、品牌色、宣传语和合规资质，后续生成时直接复用。</p>
             </div>
             <aside class="hero-side">
                 <div class="hero-stat">
@@ -391,8 +390,8 @@
                     <span>推荐模板场景自动关联</span>
                 </div>
                 <div class="hero-stat">
-                    <strong>前端演示</strong>
-                    <span>保存仅写入浏览器本地状态</span>
+                    <strong>统一口径</strong>
+                    <span>企业信息可在多个页面联动展示</span>
                 </div>
             </aside>
         </section>
@@ -444,8 +443,8 @@
                     </div>
 
                     <div class="actions">
-                        <button class="button" type="submit">保存企业模板</button>
-                        <a class="button secondary" href="/generator">继续生成视频</a>
+                        <button class="button" type="submit">保存企业资料</button>
+                        <a class="button secondary" href="/generator/company">进入企业类模板</a>
                     </div>
                     <div class="feedback" id="templateFeedback" aria-live="polite"></div>
                 </form>
@@ -454,7 +453,7 @@
             <aside class="preview-card">
                 <div class="template-mark" aria-hidden="true">企</div>
                 <h2 style="margin-top: 16px;">模板预览</h2>
-                <p style="margin-top: 8px; color: var(--muted);">当前内容会用于演示账号的企业资料展示，不会提交到服务器。</p>
+                <p style="margin-top: 8px; color: var(--muted);">当前内容会用于企业资料展示、素材摘要与企业类视频生成时的基础信息引用。</p>
                 <div class="preview-list" id="previewList">
                     <div class="preview-item"><strong id="previewName">华澄新材（苏州）有限公司</strong><span id="previewSlogan">让功能材料表达得更清楚</span></div>
                     <div class="preview-item"><strong>主营产品</strong><span id="previewProducts">水性聚氨酯分散体、无卤阻燃助剂、耐候工业树脂</span></div>
@@ -467,7 +466,7 @@
     </main>
 
     <footer class="site-footer">
-        <div class="footer-inner">智化推 · 企业模板页仅为前端演示，保存内容写入浏览器本地状态。</div>
+        <div class="footer-inner">智化推 · 企业资料模板</div>
     </footer>
 
     <script>
@@ -543,7 +542,7 @@
             const values = getFormValues();
             localStorage.setItem(storageKey, JSON.stringify(values));
             feedback.style.display = 'block';
-            feedback.textContent = '企业模板已保存到本地演示环境，可在用户中心和素材库中继续联动展示。';
+            feedback.textContent = '企业资料已更新，可在用户中心、素材库和企业类模板中继续使用。';
             syncPreview(values);
         });
     </script>

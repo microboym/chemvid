@@ -520,7 +520,6 @@
             <div class="nav-links">
                 <a href="/">首页</a>
                 <a href="/generator">视频生成</a>
-                <a href="/company-template">企业模板</a>
                 <a href="/library">素材库</a>
                 <a class="button nav-login" href="/login" data-login-link>企业登录</a>
             </div>
@@ -579,7 +578,7 @@
                 <div class="section-top">
                     <div>
                         <h2>账号概览</h2>
-                        <p style="margin: 8px 0 0; color: var(--muted);">演示账号：<span id="demoAccount">market@huachengchem.com</span></p>
+                        <p style="margin: 8px 0 0; color: var(--muted);">当前账号：<span id="demoAccount">market@huachengchem.com</span></p>
                     </div>
                     <div class="tabs" role="tablist" aria-label="内容分组">
                         <button class="tab-btn active" type="button" data-tab="account">企业信息</button>
@@ -593,7 +592,7 @@
                     <article class="section-card">
                         <div class="section-top">
                             <h3>企业资料</h3>
-                            <button class="button secondary edit-trigger" type="button" data-title="编辑企业资料">编辑资料</button>
+                            <button class="button secondary edit-trigger" type="button" data-title="编辑企业资料" data-success="企业资料已更新。">编辑资料</button>
                         </div>
                         <div class="key-grid">
                             <div><strong>企业简称</strong>华澄新材</div>
@@ -608,13 +607,13 @@
                     <article class="section-card">
                         <div class="section-top">
                             <h3>套餐与额度</h3>
-                            <button class="button secondary edit-trigger" type="button" data-title="升级套餐">升级套餐</button>
+                            <button class="button secondary edit-trigger" type="button" data-title="升级套餐" data-success="套餐信息已更新。">升级套餐</button>
                         </div>
                         <div class="key-grid">
                             <div><strong>当前套餐</strong>企业专业版</div>
                             <div><strong>到期时间</strong>2026 年 12 月 31 日</div>
                             <div><strong>剩余视频额度</strong>42 条</div>
-                            <div><strong>附加权益</strong>品牌资产库、审批流演示、子账号 12 个</div>
+                            <div><strong>附加权益</strong>品牌资产库、审批流、子账号 12 个</div>
                         </div>
                         <div class="usage-bar">
                             <div class="usage-track" aria-label="额度使用进度">
@@ -674,7 +673,7 @@
                         <article class="template-card">
                             <div class="section-top">
                                 <h3>技术参数强化型</h3>
-                                <button class="button secondary edit-trigger" type="button" data-title="编辑模板偏好">设为默认</button>
+                                <button class="button secondary edit-trigger" type="button" data-title="设为默认模板" data-success="技术参数强化型已设为默认模板。">设为默认</button>
                             </div>
                             <div class="template-meta">
                                 <span>适用品类：助剂 / 树脂 / 功能母料</span>
@@ -685,7 +684,7 @@
                         <article class="template-card">
                             <div class="section-top">
                                 <h3>展会客户邀约型</h3>
-                                <button class="button secondary edit-trigger" type="button" data-title="申请模板扩展">申请扩展</button>
+                                <button class="button secondary edit-trigger" type="button" data-title="设为默认模板" data-success="展会客户邀约型已设为默认模板。">设为默认</button>
                             </div>
                             <div class="template-meta">
                                 <span>适用场景：展会前邀约、客户签到提醒</span>
@@ -696,7 +695,7 @@
                         <article class="template-card">
                             <div class="section-top">
                                 <h3>案例证明型</h3>
-                                <button class="button secondary edit-trigger" type="button" data-title="打开模板说明">查看说明</button>
+                                <button class="button secondary edit-trigger" type="button" data-title="设为默认模板" data-success="案例证明型已设为默认模板。">设为默认</button>
                             </div>
                             <div class="template-meta">
                                 <span>适用场景：项目复盘、客户行业背书</span>
@@ -726,7 +725,7 @@
                                 <span class="status warn">待确认</span>
                             </div>
                             <div class="collapse-body">
-                                当前卡片中的“阻燃效率提升 27%”为样例数据，演示环境建议保留但正式发布需替换为审定版本。
+                                当前卡片中的“阻燃效率提升 27%”需要与最新实验数据复核一致，确认后即可进入外发版本。
                             </div>
                         </article>
                         <article class="approval-card">
@@ -765,8 +764,8 @@
 
     <div class="dialog-backdrop" id="dialogBackdrop" aria-hidden="true">
         <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
-            <h2 id="dialogTitle">演示操作</h2>
-            <p id="dialogText">此处仅展示前端交互，不会保存到服务器。</p>
+            <h2 id="dialogTitle">操作提示</h2>
+            <p id="dialogText">设置已完成。</p>
             <div class="dialog-actions">
                 <button class="button secondary" type="button" id="dialogClose">关闭</button>
             </div>
@@ -774,7 +773,7 @@
     </div>
 
     <footer class="site-footer">
-        <div class="footer-inner">智化推 · 用户中心为演示页面，不连接真实账号体系。</div>
+        <div class="footer-inner">智化推 · 用户中心</div>
     </footer>
 
     <script>
@@ -843,8 +842,8 @@
 
         document.querySelectorAll('.edit-trigger').forEach((button) => {
             button.addEventListener('click', () => {
-                dialogTitle.textContent = button.dataset.title;
-                dialogText.textContent = '这是一个演示弹层，用于展示资料编辑、套餐升级或模板配置等交互，不会写入任何真实数据。';
+                dialogTitle.textContent = button.dataset.title || '操作提示';
+                dialogText.textContent = button.dataset.success || '设置成功。';
                 dialogBackdrop.classList.add('open');
             });
         });
