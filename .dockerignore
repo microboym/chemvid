@@ -20,3 +20,7 @@ uploads/*
 outputs/*
 !outputs/.gitkeep
 *.log
+chromedriver-mac-arm64-146.0.7680.165.zip
+chromedriver-mac-arm64/
+chemvid-update.bundle
+static/library-assets/*.jpg

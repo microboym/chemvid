@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智化推 - 视频自动生成</title>
+    <style>
+        :root {
+            --ink: #1d1f21;
+            --muted: #5d646b;
+            --line: #d7dde2;
+            --paper: #f7f9f8;
+            --white: #ffffff;
+            --green: #1f7a55;
+            --green-dark: #11543a;
+            --red: #c83232;
+            --gold: #d8a02a;
+            --shadow: 0 18px 45px rgba(29, 31, 33, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background:
+                linear-gradient(135deg, rgba(247, 249, 248, 0.95), rgba(247, 249, 248, 0.82)),
+                url("/static/hero-chem.svg") center top / cover fixed;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(10px);
+            transition: background 0.25s ease, border-color 0.25s ease;
+        }
+
+        .session-active .site-header {
+            border-bottom-color: #0f4e35;
+            background: rgba(17, 84, 58, 0.94);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: min(1160px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 14px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 20px;
+            text-decoration: none;
+            transition: color 0.25s ease;
+        }
+
+        .brand-mark {
+            display: inline-grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            color: var(--white);
+            background: var(--green);
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            color: var(--muted);
+            font-size: 15px;
+            transition: color 0.25s ease;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+        }
+
+        .session-active .brand,
+        .session-active .nav-links {
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        .page {
+            width: min(1160px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 54px 0 72px;
+        }
+
+        .page-title {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 24px;
+            align-items: end;
+            margin-bottom: 24px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 12px;
+            color: var(--green-dark);
+            font-weight: 800;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 28px;
+            height: 3px;
+            border-radius: 3px;
+            background: var(--red);
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0;
+        }
+
+        h1 {
+            max-width: 780px;
+            font-size: clamp(32px, 5vw, 58px);
+            line-height: 1.12;
+            letter-spacing: 0;
+        }
+
+        .page-title p {
+            max-width: 650px;
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 20px;
+            border: 1px solid var(--green);
+            border-radius: 8px;
+            background: var(--green);
+            color: var(--white);
+            font: inherit;
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .button.secondary {
+            background: var(--white);
+            color: var(--green-dark);
+        }
+
+        .nav-login {
+            min-width: 124px;
+            box-shadow: 0 12px 24px rgba(31, 122, 85, 0.18);
+        }
+
+        .session-active .nav-login {
+            border-color: rgba(255, 255, 255, 0.42);
+            background: rgba(255, 255, 255, 0.14);
+            color: var(--white);
+            box-shadow: none;
+        }
+
+        .button:disabled {
+            cursor: not-allowed;
+            opacity: 0.68;
+        }
+
+        .workspace {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 340px;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .form-panel,
+        .side-panel,
+        .result-panel {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: var(--shadow);
+        }
+
+        .form-panel {
+            padding: clamp(22px, 4vw, 38px);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .field.wide {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: var(--ink);
+            font-weight: 800;
+        }
+
+        .hint {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            min-height: 48px;
+            border: 1px solid #c7d0d7;
+            border-radius: 8px;
+            background: var(--white);
+            color: var(--ink);
+            font: inherit;
+        }
+
+        input[type="text"] {
+            padding: 0 14px;
+        }
+
+        input[type="text"]:focus,
+        input[type="file"]:focus {
+            outline: 3px solid rgba(31, 122, 85, 0.18);
+            border-color: var(--green);
+        }
+
+        input[type="file"] {
+            padding: 10px;
+        }
+
+        input::file-selector-button {
+            min-height: 32px;
+            margin-right: 12px;
+            border: 0;
+            border-radius: 8px;
+            padding: 0 12px;
+            background: #e7f0eb;
+            color: var(--green-dark);
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .divider {
+            height: 1px;
+            margin: 28px 0;
+            background: var(--line);
+        }
+
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .upload-slot {
+            display: grid;
+            gap: 10px;
+            min-height: 180px;
+            border: 1px solid #c7d0d7;
+            border-radius: 8px;
+            padding: 16px;
+            background: #fbfcfb;
+        }
+
+        .upload-badge {
+            display: inline-grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: var(--green);
+            color: var(--white);
+            font-weight: 900;
+        }
+
+        .form-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        #loading {
+            display: none;
+            align-items: center;
+            gap: 14px;
+            min-height: 58px;
+            padding: 14px 16px;
+            border: 1px solid #cce0d5;
+            border-radius: 8px;
+            background: #eff7f3;
+            color: var(--green-dark);
+        }
+
+        .spinner {
+            width: 28px;
+            height: 28px;
+            border: 3px solid rgba(31, 122, 85, 0.2);
+            border-top-color: var(--green);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            flex: 0 0 auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .side-panel {
+            position: sticky;
+            top: 86px;
+            overflow: hidden;
+        }
+
+        .preview-header {
+            padding: 22px 22px 18px;
+            color: var(--white);
+            background: var(--green-dark);
+        }
+
+        .preview-header h2 {
+            font-size: 24px;
+            line-height: 1.2;
+            letter-spacing: 0;
+        }
+
+        .preview-header p {
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.78);
+        }
+
+        .timeline {
+            display: grid;
+            gap: 1px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            background: var(--line);
+        }
+
+        .timeline li {
+            display: grid;
+            grid-template-columns: 42px minmax(0, 1fr);
+            gap: 12px;
+            padding: 18px 20px;
+            background: var(--white);
+        }
+
+        .timeline strong {
+            display: block;
+            color: var(--ink);
+        }
+
+        .timeline span {
+            display: block;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .step-num {
+            display: inline-grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            color: var(--green-dark);
+            background: #e7f0eb;
+            font-weight: 900;
+        }
+
+        .result-panel {
+            display: none;
+            margin-top: 22px;
+            padding: 26px;
+        }
+
+        .result-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .result-copy h2 {
+            color: var(--green-dark);
+            font-size: 28px;
+            line-height: 1.2;
+            letter-spacing: 0;
+        }
+
+        .result-copy p {
+            margin-top: 10px;
+            color: var(--muted);
+        }
+
+        video {
+            display: block;
+            width: min(280px, 100%);
+            max-height: 500px;
+            border-radius: 8px;
+            background: #111;
+            box-shadow: 0 14px 34px rgba(29, 31, 33, 0.22);
+        }
+
+        @media (max-width: 980px) {
+            .workspace,
+            .page-title,
+            .result-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .side-panel {
+                position: static;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .nav {
+                align-items: flex-start;
+                gap: 14px;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .page {
+                padding: 34px 0 48px;
+            }
+
+            .form-grid,
+            .upload-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .upload-slot {
+                min-height: 150px;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="主导航">
+            <a class="brand" href="/">
+                <span class="brand-mark" aria-hidden="true">智</span>
+                <span>智化推</span>
+            </a>
+            <div class="nav-links">
+                <a href="/generator">返回模板选择</a>
+                <a href="/profile">用户中心</a>
+                <a href="/company-template">企业模板</a>
+                <a href="/library">素材库</a>
+                <a href="/static/manual.pdf">使用手册</a>
+                <a class="button nav-login" href="/login" data-login-link>企业登录</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page">
+        <section class="page-title" aria-labelledby="page-title">
+            <div>
+                <p class="eyebrow">产品类模板</p>
+                <h1 id="page-title">填写产品资料，生成中文竖版推广短视频</h1>
+                <p>建议使用清晰的产品图和企业标识图。提交后系统会自动生成脚本、中文配音、字幕和 MP4 成片。</p>
+            </div>
+            <div class="form-actions" style="margin-top: 0;">
+                <a class="button secondary" href="/generator">返回模板选择</a>
+                <a class="button secondary" href="/library">进入素材库</a>
+            </div>
+        </section>
+
+        <section class="workspace" aria-label="视频生成工作台">
+            <div>
+                <div class="form-panel">
+                    <form id="videoForm">
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="company_name">公司名称 / 品牌名</label>
+                                <input id="company_name" type="text" name="company_name" required placeholder="例如：山东精细化工有限公司">
+                            </div>
+
+                            <div class="field">
+                                <label for="product_name">产品名称</label>
+                                <input id="product_name" type="text" name="product_name" required placeholder="例如：高纯度聚氨酯">
+                            </div>
+
+                            <div class="field">
+                                <label for="application_area">应用领域</label>
+                                <input id="application_area" type="text" name="application_area" required placeholder="例如：建筑保温">
+                                <span class="hint">用于生成开场痛点。</span>
+                            </div>
+
+                            <div class="field">
+                                <label for="selling_points">性能卖点</label>
+                                <input id="selling_points" type="text" name="selling_points" required placeholder="例如：纯度≥99.5%，反应效率提升30%">
+                                <span class="hint">建议填写 1-3 个核心卖点。</span>
+                            </div>
+                        </div>
+
+                        <div class="divider" role="presentation"></div>
+
+                        <div class="upload-grid">
+                            <div class="upload-slot">
+                                <span class="upload-badge" aria-hidden="true">1</span>
+                                <div class="field">
+                                    <label for="bg_img">应用领域背景图</label>
+                                    <span class="hint">用于痛点开场，建议使用场景或行业图片。</span>
+                                    <input id="bg_img" type="file" name="bg_img" accept="image/*" required>
+                                </div>
+                            </div>
+
+                            <div class="upload-slot">
+                                <span class="upload-badge" aria-hidden="true">2</span>
+                                <div class="field">
+                                    <label for="product_img">产品特写图 / 效果图</label>
+                                    <span class="hint">用于产品展示和卖点展示。</span>
+                                    <input id="product_img" type="file" name="product_img" accept="image/*" required>
+                                </div>
+                            </div>
+
+                            <div class="upload-slot">
+                                <span class="upload-badge" aria-hidden="true">3</span>
+                                <div class="field">
+                                    <label for="logo_img">公司 LOGO / 门店照片</label>
+                                    <span class="hint">用于品牌收尾，图片越清晰越好。</span>
+                                    <input id="logo_img" type="file" name="logo_img" accept="image/*" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="button" id="submitBtn">一键生成短视频</button>
+                            <div id="loading" aria-live="polite">
+                                <span class="spinner" aria-hidden="true"></span>
+                                <span>正在合成视频中，请稍候... 大约需要 1-2 分钟。</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="video-container" class="result-panel">
+                    <div class="result-layout">
+                        <div class="result-copy">
+                            <h2>生成成功</h2>
+                            <p>视频已完成合成，可直接预览或下载 MP4 文件。</p>
+                            <div class="form-actions">
+                                <a id="downloadBtn" href="#" class="button secondary" download>下载视频</a>
+                            </div>
+                        </div>
+                        <video id="resultVideo" controls width="360"></video>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="side-panel" aria-label="成片结构">
+                <div class="preview-header">
+                    <h2>成片结构</h2>
+                    <p>系统会按固定顺序合成 15-20 秒竖版视频。</p>
+                </div>
+                <ol class="timeline">
+                    <li>
+                        <span class="step-num">1</span>
+                        <div>
+                            <strong>行业痛点</strong>
+                            <span>用应用领域背景图引出客户问题。</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-num">2</span>
+                        <div>
+                            <strong>产品展示</strong>
+                            <span>展示产品名称和适用场景。</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-num">3</span>
+                        <div>
+                            <strong>性能卖点</strong>
+                            <span>突出纯度、效率、稳定性等核心优势。</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-num">4</span>
+                        <div>
+                            <strong>品牌收尾</strong>
+                            <span>展示企业名称并引导合作咨询。</span>
+                        </div>
+                    </li>
+                </ol>
+            </aside>
+        </section>
+    </main>
+
+    <script>
+        const sessionKey = 'chemvidDemoSession';
+        const accountKey = 'chemvidDemoAccount';
+        const form = document.getElementById('videoForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const loadingDiv = document.getElementById('loading');
+        const videoContainer = document.getElementById('video-container');
+        const resultVideo = document.getElementById('resultVideo');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        (function applySessionNav() {
+            const loggedIn = localStorage.getItem(sessionKey) === 'active';
+            const loginLink = document.querySelector('[data-login-link]');
+            document.body.classList.toggle('session-active', loggedIn);
+            if (!loginLink) {
+                return;
+            }
+            if (loggedIn) {
+                loginLink.textContent = '退出登录';
+                loginLink.href = '/';
+                loginLink.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    localStorage.removeItem(sessionKey);
+                    localStorage.removeItem(accountKey);
+                    window.location.href = '/';
+                }, { once: true });
+            }
+        })();
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            submitBtn.disabled = true;
+            loadingDiv.style.display = 'inline-flex';
+            videoContainer.style.display = 'none';
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.task_id) {
+                    pollStatus(data.task_id);
+                } else {
+                    alert("提交失败，请重试！");
+                    resetUI();
+                }
+            } catch (error) {
+                console.error(error);
+                alert("网络错误！");
+                resetUI();
+            }
+        });
+
+        function pollStatus(taskId) {
+            const intervalId = setInterval(async () => {
+                try {
+                    const res = await fetch(`/api/status/${taskId}`);
+                    const statusData = await res.json();
+
+                    if (statusData.status === 'completed') {
+                        clearInterval(intervalId);
+
+                        loadingDiv.style.display = 'none';
+                        videoContainer.style.display = 'block';
+
+                        resultVideo.src = statusData.video_url;
+                        downloadBtn.href = statusData.video_url;
+
+                        submitBtn.disabled = false;
+                        form.reset();
+                    } else if (statusData.status === 'failed') {
+                        clearInterval(intervalId);
+                        alert("视频生成失败，请检查服务器日志。");
+                        resetUI();
+                    } else if (statusData.status === 'not_found') {
+                        clearInterval(intervalId);
+                        alert("任务已失效，请刷新页面后重新提交。");
+                        resetUI();
+                    }
+                } catch (err) {
+                    console.error("Polling error:", err);
+                }
+            }, 3000);
+        }
+
+        function resetUI() {
+            submitBtn.disabled = false;
+            loadingDiv.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

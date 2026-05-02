@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智化推 - 企业类模板</title>
+    <style>
+        :root {
+            --ink: #1d1f21;
+            --muted: #5d646b;
+            --line: #d7dde2;
+            --paper: #f7f9f8;
+            --white: #ffffff;
+            --green: #1f7a55;
+            --green-dark: #11543a;
+            --blue: #254d68;
+            --blue-soft: #eaf1f6;
+            --red: #c83232;
+            --shadow: 0 18px 45px rgba(29, 31, 33, 0.12);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background:
+                linear-gradient(135deg, rgba(247, 249, 248, 0.95), rgba(247, 249, 248, 0.84)),
+                url("/static/hero-chem.svg") center top / cover fixed;
+            line-height: 1.6;
+        }
+
+        a { color: inherit; }
+        input, textarea, select, button { font: inherit; }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(10px);
+            transition: background 0.25s ease, border-color 0.25s ease;
+        }
+
+        .session-active .site-header {
+            border-bottom-color: #18394d;
+            background: rgba(26, 56, 80, 0.94);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 14px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 800;
+            text-decoration: none;
+            transition: color 0.25s ease;
+        }
+
+        .brand-mark {
+            display: inline-grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            color: var(--white);
+            background: var(--green);
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            color: var(--muted);
+            font-size: 15px;
+            transition: color 0.25s ease;
+        }
+
+        .nav-links a { text-decoration: none; }
+
+        .session-active .brand,
+        .session-active .nav-links {
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 20px;
+            border: 1px solid var(--blue);
+            border-radius: 8px;
+            background: var(--blue);
+            color: var(--white);
+            font-weight: 800;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .button.secondary {
+            background: var(--white);
+            color: var(--blue);
+        }
+
+        .nav-login {
+            min-width: 124px;
+            box-shadow: 0 12px 24px rgba(37, 77, 104, 0.18);
+        }
+
+        .session-active .nav-login {
+            border-color: rgba(255, 255, 255, 0.42);
+            background: rgba(255, 255, 255, 0.14);
+            color: var(--white);
+            box-shadow: none;
+        }
+
+        .page {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 44px 0 72px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 320px;
+            gap: 24px;
+            padding: clamp(28px, 4vw, 42px);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: var(--shadow);
+        }
+
+        h1, h2, h3, p { margin: 0; }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 16px;
+            color: var(--blue);
+            font-weight: 800;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 28px;
+            height: 3px;
+            border-radius: 3px;
+            background: var(--red);
+        }
+
+        h1 {
+            font-size: clamp(34px, 5vw, 56px);
+            line-height: 1.08;
+        }
+
+        .hero p {
+            margin-top: 14px;
+            color: var(--muted);
+            max-width: 760px;
+        }
+
+        .hero-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .hero-item {
+            padding: 16px;
+            border-radius: 8px;
+            background: var(--blue-soft);
+        }
+
+        .hero-item strong {
+            display: block;
+            color: var(--blue);
+            font-size: 22px;
+        }
+
+        .hero-item span {
+            display: block;
+            margin-top: 4px;
+            color: #506170;
+            font-size: 14px;
+        }
+
+        .workspace {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 340px;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .panel, .side-panel, .result-panel {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: var(--shadow);
+        }
+
+        .panel { padding: clamp(22px, 4vw, 34px); }
+        .side-panel { padding: 22px; position: sticky; top: 92px; }
+
+        .section-title {
+            margin-bottom: 18px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .field.wide { grid-column: 1 / -1; }
+
+        label { font-weight: 800; }
+
+        input[type="text"],
+        textarea,
+        input[type="file"],
+        select {
+            width: 100%;
+            border: 1px solid #c7d0d7;
+            border-radius: 8px;
+            background: var(--white);
+            color: var(--ink);
+        }
+
+        input[type="text"], select {
+            min-height: 48px;
+            padding: 0 14px;
+        }
+
+        textarea {
+            min-height: 116px;
+            padding: 12px 14px;
+            resize: vertical;
+        }
+
+        input[type="file"] {
+            min-height: 48px;
+            padding: 10px 12px;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: 3px solid rgba(37, 77, 104, 0.18);
+            border-color: var(--blue);
+        }
+
+        .hint {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .divider {
+            height: 1px;
+            margin: 28px 0;
+            background: var(--line);
+        }
+
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .upload-card {
+            padding: 18px;
+            border: 1px solid #d9dfe5;
+            border-radius: 8px;
+            background: #fbfcfc;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        #loading {
+            display: none;
+            align-items: center;
+            gap: 14px;
+            min-height: 58px;
+            padding: 14px 16px;
+            border: 1px solid #cfe0ea;
+            border-radius: 8px;
+            background: #eef5fa;
+            color: var(--blue);
+        }
+
+        .spinner {
+            width: 28px;
+            height: 28px;
+            border: 3px solid rgba(37, 77, 104, 0.2);
+            border-top-color: var(--blue);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .result-panel {
+            display: none;
+            margin-top: 22px;
+            padding: 26px;
+        }
+
+        .result-panel ul {
+            margin: 14px 0 0;
+            padding-left: 20px;
+            color: var(--muted);
+        }
+
+        .side-panel h2 {
+            color: var(--blue);
+            font-size: 24px;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .timeline-item {
+            padding-top: 12px;
+            border-top: 1px solid var(--line);
+        }
+
+        .timeline-item strong {
+            display: block;
+        }
+
+        .timeline-item span {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        @media (max-width: 980px) {
+            .hero, .workspace {
+                grid-template-columns: 1fr;
+            }
+
+            .side-panel {
+                position: static;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .nav {
+                align-items: flex-start;
+                gap: 14px;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .form-grid, .upload-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="主导航">
+            <a class="brand" href="/">
+                <span class="brand-mark" aria-hidden="true">智</span>
+                <span>智化推</span>
+            </a>
+            <div class="nav-links">
+                <a href="/generator">返回模板选择</a>
+                <a href="/profile">用户中心</a>
+                <a href="/company-template">企业模板</a>
+                <a href="/library">素材库</a>
+                <a class="button nav-login" href="/login" data-login-link>企业登录</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page">
+        <section class="hero">
+            <div>
+                <p class="eyebrow">企业类模板</p>
+                <h1>输入企业介绍与多媒体素材，生成公司宣传类视频底稿</h1>
+                <p>适合企业形象宣传、工厂实力展示、招商合作、客户案例汇总和年度品牌更新。演示页面支持文本、图片、视频和附件类内容采集，用于规划企业宣传片的素材结构。</p>
+            </div>
+            <aside class="hero-list">
+                <div class="hero-item">
+                    <strong>文本</strong>
+                    <span>企业介绍、宣传语、主营产品、资质、客户行业</span>
+                </div>
+                <div class="hero-item">
+                    <strong>图片</strong>
+                    <span>工厂图、团队图、产品组图、证书图、案例图</span>
+                </div>
+                <div class="hero-item">
+                    <strong>视频</strong>
+                    <span>车间视频、活动花絮、展会录像、客户采访片段</span>
+                </div>
+            </aside>
+        </section>
+
+        <section class="workspace">
+            <div>
+                <div class="panel">
+                    <div class="section-title">
+                        <h2>企业类模板内容采集</h2>
+                        <p style="margin-top: 8px; color: var(--muted);">本页为企业宣传视频演示流。当前提交仅做前端模拟，用于整理内容结构与生成需求。</p>
+                    </div>
+
+                    <form id="companyVideoForm">
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="companyName">企业名称</label>
+                                <input id="companyName" type="text" placeholder="例如：华澄新材（苏州）有限公司" required>
+                            </div>
+                            <div class="field">
+                                <label for="videoGoal">视频目标</label>
+                                <select id="videoGoal" required>
+                                    <option value="企业形象宣传">企业形象宣传</option>
+                                    <option value="招商合作介绍">招商合作介绍</option>
+                                    <option value="工厂实力展示">工厂实力展示</option>
+                                    <option value="客户案例汇总">客户案例汇总</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="mainProducts">主营产品</label>
+                                <input id="mainProducts" type="text" placeholder="例如：水性聚氨酯、无卤阻燃助剂、工业树脂" required>
+                            </div>
+                            <div class="field">
+                                <label for="targetIndustries">目标行业</label>
+                                <input id="targetIndustries" type="text" placeholder="例如：建筑节能、电子封装、新能源汽车">
+                            </div>
+                            <div class="field wide">
+                                <label for="companyIntro">企业简介</label>
+                                <textarea id="companyIntro" placeholder="请输入企业定位、规模、核心优势、服务区域等信息" required></textarea>
+                            </div>
+                            <div class="field wide">
+                                <label for="storyline">希望表达的核心内容</label>
+                                <textarea id="storyline" placeholder="例如：先展示园区航拍，再介绍研发能力、资质和客户案例，最后引导合作咨询" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="upload-grid">
+                            <div class="upload-card">
+                                <div class="field">
+                                    <label for="factoryImages">工厂 / 园区图片</label>
+                                    <input id="factoryImages" type="file" accept="image/*" multiple>
+                                    <span class="hint">支持厂区航拍、车间、实验室、办公区照片。</span>
+                                </div>
+                            </div>
+                            <div class="upload-card">
+                                <div class="field">
+                                    <label for="brandImages">品牌图片 / 证书 / 团队图</label>
+                                    <input id="brandImages" type="file" accept="image/*" multiple>
+                                    <span class="hint">支持 Logo、资质图、荣誉证书、团队照片等。</span>
+                                </div>
+                            </div>
+                            <div class="upload-card">
+                                <div class="field">
+                                    <label for="productMedia">产品组图 / 案例图</label>
+                                    <input id="productMedia" type="file" accept="image/*,video/*" multiple>
+                                    <span class="hint">支持产品实拍、应用场景图、客户案例截图与短视频。</span>
+                                </div>
+                            </div>
+                            <div class="upload-card">
+                                <div class="field">
+                                    <label for="introVideo">企业宣传视频 / 展会片段</label>
+                                    <input id="introVideo" type="file" accept="video/*" multiple>
+                                    <span class="hint">支持现有宣传片、工厂视频、展会录像和采访片段。</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="actions">
+                            <button type="submit" class="button" id="companySubmitBtn">生成企业类视频方案</button>
+                            <div id="loading" aria-live="polite">
+                                <span class="spinner" aria-hidden="true"></span>
+                                <span>正在整理企业宣传片内容结构，请稍候...</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="companyResult" class="result-panel">
+                    <h2>企业类模板已整理完成</h2>
+                    <p style="margin-top: 10px; color: var(--muted);">演示环境已根据你提交的企业资料生成一份企业宣传视频采集方案，正式版可继续接入真实视频合成链路。</p>
+                    <ul id="resultList"></ul>
+                </div>
+            </div>
+
+            <aside class="side-panel">
+                <h2>建议成片结构</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <strong>1. 企业亮相</strong>
+                        <span>品牌口号、园区航拍、企业名称与定位。</span>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>2. 核心能力</strong>
+                        <span>研发、产能、认证、交付能力、服务行业。</span>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>3. 产品与案例</strong>
+                        <span>产品组图、应用行业、案例素材、客户场景。</span>
+                    </div>
+                    <div class="timeline-item">
+                        <strong>4. 合作收尾</strong>
+                        <span>品牌收尾、联系方式、合作引导与渠道露出。</span>
+                    </div>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <script>
+        const sessionKey = 'chemvidDemoSession';
+        const accountKey = 'chemvidDemoAccount';
+        const companyForm = document.getElementById('companyVideoForm');
+        const companySubmitBtn = document.getElementById('companySubmitBtn');
+        const loadingDiv = document.getElementById('loading');
+        const resultPanel = document.getElementById('companyResult');
+        const resultList = document.getElementById('resultList');
+
+        (function applySessionNav() {
+            const loggedIn = localStorage.getItem(sessionKey) === 'active';
+            const loginLink = document.querySelector('[data-login-link]');
+            document.body.classList.toggle('session-active', loggedIn);
+            if (!loginLink) {
+                return;
+            }
+            if (loggedIn) {
+                loginLink.textContent = '退出登录';
+                loginLink.href = '/';
+                loginLink.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    localStorage.removeItem(sessionKey);
+                    localStorage.removeItem(accountKey);
+                    window.location.href = '/';
+                }, { once: true });
+            }
+        })();
+
+        companyForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            companySubmitBtn.disabled = true;
+            loadingDiv.style.display = 'inline-flex';
+            resultPanel.style.display = 'none';
+
+            const summary = [
+                `企业名称：${document.getElementById('companyName').value.trim() || '未填写'}`,
+                `视频目标：${document.getElementById('videoGoal').value}`,
+                `主营产品：${document.getElementById('mainProducts').value.trim() || '未填写'}`,
+                `目标行业：${document.getElementById('targetIndustries').value.trim() || '未填写'}`,
+                `企业简介长度：${document.getElementById('companyIntro').value.trim().length} 字`,
+                `内容结构说明长度：${document.getElementById('storyline').value.trim().length} 字`,
+                `工厂图片：${document.getElementById('factoryImages').files.length} 份`,
+                `品牌图片 / 证书：${document.getElementById('brandImages').files.length} 份`,
+                `产品 / 案例媒体：${document.getElementById('productMedia').files.length} 份`,
+                `视频片段：${document.getElementById('introVideo').files.length} 份`
+            ];
+
+            window.setTimeout(() => {
+                resultList.innerHTML = summary.map((item) => `<li>${item}</li>`).join('');
+                loadingDiv.style.display = 'none';
+                resultPanel.style.display = 'block';
+                companySubmitBtn.disabled = false;
+            }, 1600);
+        });
+    </script>
+</body>
+</html>

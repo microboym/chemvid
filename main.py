@@ -23,6 +23,14 @@ def serve_index():
 def serve_generator():
     return FileResponse("static/generator.html")
 
+@app.get("/generator/product")
+def serve_generator_product():
+    return FileResponse("static/generator-product.html")
+
+@app.get("/generator/company")
+def serve_generator_company():
+    return FileResponse("static/generator-company.html")
+
 @app.get("/login")
 def serve_login():
     return FileResponse("static/login.html")
