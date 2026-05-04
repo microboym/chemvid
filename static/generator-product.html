@@ -76,9 +76,15 @@
             width: 34px;
             height: 34px;
             border-radius: 8px;
-            color: var(--white);
+            overflow: hidden;
             background: var(--green);
-            font-size: 18px;
+        }
+
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .nav-links {
@@ -484,7 +490,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="主导航">
             <a class="brand" href="/">
-                <span class="brand-mark" aria-hidden="true">智</span>
+                <span class="brand-mark" aria-hidden="true"><img src="/static/real-assets/zhihuitui-mark.jpg" alt=""></span>
                 <span>智化推</span>
             </a>
             <div class="nav-links">
@@ -517,23 +523,23 @@
                         <div class="form-grid">
                             <div class="field">
                                 <label for="company_name">公司名称 / 品牌名</label>
-                                <input id="company_name" type="text" name="company_name" required placeholder="例如：山东精细化工有限公司">
+                                <input id="company_name" type="text" name="company_name" required placeholder="例如：珠海市丁又化工有限公司">
                             </div>
 
                             <div class="field">
                                 <label for="product_name">产品名称</label>
-                                <input id="product_name" type="text" name="product_name" required placeholder="例如：高纯度聚氨酯">
+                                <input id="product_name" type="text" name="product_name" required placeholder="例如：新型双组分水性聚氨酯">
                             </div>
 
                             <div class="field">
                                 <label for="application_area">应用领域</label>
-                                <input id="application_area" type="text" name="application_area" required placeholder="例如：建筑保温">
+                                <input id="application_area" type="text" name="application_area" required placeholder="例如：木家具涂装">
                                 <span class="hint">用于生成开场痛点。</span>
                             </div>
 
                             <div class="field">
                                 <label for="selling_points">性能卖点</label>
-                                <input id="selling_points" type="text" name="selling_points" required placeholder="例如：纯度≥99.5%，反应效率提升30%">
+                                <input id="selling_points" type="text" name="selling_points" required placeholder="例如：双组分水性体系、适用于木家具表面效果展示">
                                 <span class="hint">建议填写 1-3 个核心卖点。</span>
                             </div>
                         </div>
@@ -562,8 +568,8 @@
                             <div class="upload-slot">
                                 <span class="upload-badge" aria-hidden="true">3</span>
                                 <div class="field">
-                                    <label for="logo_img">公司 LOGO / 门店照片</label>
-                                    <span class="hint">用于品牌收尾，图片越清晰越好。</span>
+                                    <label for="logo_img">品牌商标 / 企业标识</label>
+                                    <span class="hint">建议上传益润宝商标或企业标识，用于品牌收尾。</span>
                                     <input id="logo_img" type="file" name="logo_img" accept="image/*" required>
                                 </div>
                             </div>

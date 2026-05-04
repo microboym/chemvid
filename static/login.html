@@ -81,9 +81,15 @@
             width: 34px;
             height: 34px;
             border-radius: 8px;
-            color: var(--white);
+            overflow: hidden;
             background: var(--green);
-            font-size: 18px;
+        }
+
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .nav-links {
@@ -491,7 +497,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="主导航">
             <a class="brand" href="/">
-                <span class="brand-mark" aria-hidden="true">智</span>
+                <span class="brand-mark" aria-hidden="true"><img src="/static/real-assets/zhihuitui-mark.jpg" alt=""></span>
                 <span>智化推</span>
             </a>
             <div class="nav-links">
@@ -512,22 +518,22 @@
                 <p class="lead">面向精细化工、新材料、助剂与涂料企业的营销工作台。登录后可查看企业视频额度、常用模板、内部素材库与审批通知，适合展会前快速出样与团队协同管理。</p>
                 <div class="hero-meta" aria-label="平台数据">
                     <div class="metric">
-                        <strong>1260+</strong>
-                        <span>企业账号已开通</span>
+                        <strong>3 张图 + 4 条信息</strong>
+                        <span>产品类模板快速出片</span>
                     </div>
                     <div class="metric">
-                        <strong>8.7 万</strong>
-                        <span>累计生成化工短视频片段</span>
+                        <strong>1 分钟内</strong>
+                        <span>即可预览成片</span>
                     </div>
                     <div class="metric">
-                        <strong>32 个</strong>
-                        <span>化工营销模板已接入</span>
+                        <strong>7 × 12</strong>
+                        <span>工作时段在线响应</span>
                     </div>
                 </div>
                 <div class="notice-bar" aria-label="登录提示">
                     <span>企业账号统一通过 HTTPS 加密传输</span>
                     <span>支持品牌素材隔离与审批留痕</span>
-                    <span>近 30 天新增 PVC、聚氨酯、涂料场景模板</span>
+                    <span>支持产品推广、客户跟进、企业宣传三类常见场景</span>
                 </div>
             </div>
 
@@ -548,7 +554,7 @@
                 <form id="loginForm">
                     <div class="field">
                         <label for="mobileInput">企业手机号 / 工号邮箱</label>
-                        <input id="mobileInput" name="mobile" placeholder="例如：13800138000 或 market@huachengchem.com" required>
+                        <input id="mobileInput" name="mobile" placeholder="例如：13800138000 或 企业工号邮箱" required>
                     </div>
 
                     <div class="field" id="secretField">
@@ -592,7 +598,7 @@
                         </div>
                         <div class="list-item">
                             <strong>推荐体验路径</strong>
-                            <span>登录后可查看华澄新材的套餐额度、最近生成记录、企业资料与品牌素材库。</span>
+                            <span>登录后可查看珠海市丁又化工有限公司的企业资料、产品素材、品牌商标与使用手册。</span>
                         </div>
                         <div class="list-item">
                             <strong>协同方式</strong>
@@ -605,16 +611,16 @@
                     <h2>平台公告</h2>
                     <div class="list">
                         <div class="list-item">
-                            <strong>4 月 28 日 09:30 模板库更新</strong>
-                            <span>新增“阻燃剂解决方案”“水性涂料应用”两套中文脚本模板，适配展会邀约场景。</span>
+                            <strong>产品类模板</strong>
+                            <span>支持 3 张图 + 4 条信息快速生成获客短视频，适合产品推广与客户跟进。</span>
                         </div>
                         <div class="list-item">
-                            <strong>4 月 25 日 18:00 审批流优化</strong>
-                            <span>支持在用户中心按“待确认 / 已通过 / 退回修改”筛选审批卡片。</span>
+                            <strong>企业类模板</strong>
+                            <span>支持企业资料、品牌商标、产品系列图、手册与视频片段统一整理。</span>
                         </div>
                         <div class="list-item">
-                            <strong>4 月 22 日 14:10 品牌资产扩展</strong>
-                            <span>素材库新增宣传文案、企业介绍资料与工厂场景图分组。</span>
+                            <strong>素材库能力</strong>
+                            <span>支持集中管理产品图、效果图、品牌商标与 PDF 使用手册，便于反复复用。</span>
                         </div>
                     </div>
                 </article>
@@ -643,16 +649,16 @@
                     <h2>服务可信度</h2>
                     <div class="trust-grid">
                         <div class="trust-item">
-                            <strong>17 个</strong>
-                            <span>细分行业场景覆盖</span>
+                            <strong>2 类模板</strong>
+                            <span>产品推广与企业宣传</span>
                         </div>
                         <div class="trust-item">
-                            <strong>92%</strong>
-                            <span>用户认为可缩短出样时间</span>
+                            <strong>3 步完成</strong>
+                            <span>选模板、填信息、传素材</span>
                         </div>
                         <div class="trust-item">
-                            <strong>ISO 风格</strong>
-                            <span>支持质量与合规信息展示模板</span>
+                            <strong>化工合规</strong>
+                            <span>支持违规词检测与内部审批</span>
                         </div>
                         <div class="trust-item">
                             <strong>7 x 12</strong>
@@ -711,7 +717,7 @@
             feedback.textContent = '正在登录并加载企业工作台，2 秒后返回首页。';
 
             window.setTimeout(() => {
-                const account = mobileInput.value.trim() || 'market@huachengchem.com';
+                const account = mobileInput.value.trim() || '丁又化工企业账号';
                 localStorage.setItem(sessionKey, 'active');
                 localStorage.setItem(accountKey, account);
                 window.location.href = '/';

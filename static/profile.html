@@ -78,9 +78,16 @@
             width: 34px;
             height: 34px;
             border-radius: 8px;
-            color: var(--white);
+            overflow: hidden;
             background: var(--green);
-            font-size: 18px;
+        }
+
+        .brand-mark img,
+        .logo-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .nav-links {
@@ -514,7 +521,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="主导航">
             <a class="brand" href="/">
-                <span class="brand-mark" aria-hidden="true">智</span>
+                <span class="brand-mark" aria-hidden="true"><img src="/static/real-assets/zhihuitui-mark.jpg" alt=""></span>
                 <span>智化推</span>
             </a>
             <div class="nav-links">
@@ -530,8 +537,8 @@
         <section class="hero" aria-labelledby="profile-title">
             <div>
                 <p class="eyebrow">用户中心</p>
-                <h1 id="profile-title">华澄新材营销协同台</h1>
-                <p>华澄新材（苏州）有限公司专注于水性聚氨酯分散体、环保型阻燃助剂与高附着力工业涂层树脂，服务新能源汽车、建筑节能、电子封装与高端包装材料客户。</p>
+                <h1 id="profile-title">丁又化工 · 益润宝资料工作台</h1>
+                <p>珠海市丁又化工有限公司品牌商标为益润宝，当前已整理新型双组分水性聚氨酯、无铬耐指纹剂、附着力促进剂、流平剂等真实素材，可直接用于产品推广与企业宣传视频生成。</p>
                 <div class="hero-actions">
                     <a class="button" href="/generator">继续生成视频</a>
                     <a class="button secondary" href="/library">进入素材库</a>
@@ -539,38 +546,38 @@
             </div>
             <aside class="hero-side" aria-label="账户摘要">
                 <div class="stat-card">
-                    <strong>108 / 150</strong>
-                    <span>本月视频额度已使用</span>
+                    <strong>3 张图 + 4 条信息</strong>
+                    <span>产品类模板 1 分钟内出片</span>
                 </div>
                 <div class="stat-card">
-                    <strong>6 条</strong>
-                    <span>待审批对外发布内容</span>
+                    <strong>2 类模板</strong>
+                    <span>产品推广 / 企业宣传</span>
                 </div>
                 <div class="stat-card">
-                    <strong>23 套</strong>
-                    <span>常用行业模板已收藏</span>
+                    <strong>7 类产品方向</strong>
+                    <span>已整理到企业资料与素材库</span>
                 </div>
             </aside>
         </section>
 
         <section class="overview">
             <aside class="panel company-card" aria-label="企业信息">
-                <div class="logo-mark" aria-hidden="true">澄</div>
+                <div class="logo-mark" aria-hidden="true"><img src="/static/real-assets/yirunbao-logo.png" alt=""></div>
                 <div>
-                    <h2 style="margin: 0;">华澄新材（苏州）有限公司</h2>
-                    <p style="margin-top: 10px; color: var(--muted);">国家级高新技术企业，聚焦绿色树脂、涂层助剂和功能性新材料的市场传播与技术展示。</p>
+                    <h2 style="margin: 0;">珠海市丁又化工有限公司</h2>
+                    <p style="margin-top: 10px; color: var(--muted);">品牌商标为益润宝，当前素材围绕新型双组分水性聚氨酯、无铬耐指纹剂及相关助剂产品整理，可用于日常产品推广与企业宣传。</p>
                 </div>
                 <div class="meta-list">
-                    <div><strong>地区：</strong>江苏苏州工业园区</div>
-                    <div><strong>行业认证：</strong>ISO 9001、ISO 14001、REACH 合规档案齐备</div>
-                    <div><strong>服务行业：</strong>建筑节能、工业包装、电子材料、轨道交通</div>
-                    <div><strong>联系人：</strong>市场中心 周岚 · 0512-6688 2190</div>
+                    <div><strong>地区：</strong>广东珠海</div>
+                    <div><strong>品牌商标：</strong>益润宝</div>
+                    <div><strong>产品方向：</strong>氟碳树脂、水性聚氨酯、电子化学品、附着力促进剂、无铬耐指纹剂、水性阳离子树脂</div>
+                    <div><strong>当前资料：</strong>产品图 2 份、效果图 1 份、品牌商标 1 份、PDF 手册 1 份</div>
                 </div>
                 <div class="chip-row">
-                    <span class="chip">水性聚氨酯</span>
-                    <span class="chip">阻燃助剂</span>
-                    <span class="chip">工业树脂</span>
-                    <span class="chip">OEM 客户宣讲</span>
+                    <span class="chip">新型双组分水性聚氨酯</span>
+                    <span class="chip">无铬耐指纹剂</span>
+                    <span class="chip">附着力促进剂</span>
+                    <span class="chip">流平剂</span>
                 </div>
             </aside>
 
@@ -578,7 +585,7 @@
                 <div class="section-top">
                     <div>
                         <h2>账号概览</h2>
-                        <p style="margin: 8px 0 0; color: var(--muted);">当前账号：<span id="demoAccount">market@huachengchem.com</span></p>
+                        <p style="margin: 8px 0 0; color: var(--muted);">当前账号：<span id="demoAccount">丁又化工企业账号</span></p>
                     </div>
                     <div class="tabs" role="tablist" aria-label="内容分组">
                         <button class="tab-btn active" type="button" data-tab="account">企业信息</button>
@@ -595,31 +602,31 @@
                             <button class="button secondary edit-trigger" type="button" data-title="编辑企业资料" data-success="企业资料已更新。">编辑资料</button>
                         </div>
                         <div class="key-grid">
-                            <div><strong>企业简称</strong>华澄新材</div>
-                            <div><strong>品牌宣传语</strong>让功能材料表达得更清楚</div>
-                            <div><strong>主营产品</strong>水性聚氨酯分散体、无卤阻燃助剂、耐候工业树脂</div>
-                            <div><strong>目标客户</strong>涂料厂、复合材料厂、汽车零部件供应商</div>
-                            <div><strong>海外市场</strong>东南亚、日韩、中东样品推广</div>
-                            <div><strong>模板偏好</strong>技术对比型、展会邀约型、案例展示型</div>
+                            <div><strong>企业简称</strong>丁又化工</div>
+                            <div><strong>品牌商标</strong>益润宝</div>
+                            <div><strong>主营产品</strong>新型双组分水性聚氨酯、无铬耐指纹剂、附着力促进剂、流平剂</div>
+                            <div><strong>产品系列</strong>氟碳树脂、水性聚氨酯、电子化学品、水性烤漆树脂、水性阳离子树脂</div>
+                            <div><strong>资料来源</strong>实拍产品图、木家具效果图、品牌商标、产品手册</div>
+                            <div><strong>模板偏好</strong>产品类模板、企业类模板、客户跟进视频</div>
                         </div>
                     </article>
 
                     <article class="section-card">
                         <div class="section-top">
-                            <h3>套餐与额度</h3>
+                            <h3>平台能力</h3>
                             <button class="button secondary edit-trigger" type="button" data-title="升级套餐" data-success="套餐信息已更新。">升级套餐</button>
                         </div>
                         <div class="key-grid">
-                            <div><strong>当前套餐</strong>企业专业版</div>
-                            <div><strong>到期时间</strong>2026 年 12 月 31 日</div>
-                            <div><strong>剩余视频额度</strong>42 条</div>
-                            <div><strong>附加权益</strong>品牌资产库、审批流、子账号 12 个</div>
+                            <div><strong>当前模式</strong>化工企业短视频工作台</div>
+                            <div><strong>产品类模板</strong>3 张图 + 4 条信息</div>
+                            <div><strong>企业类模板</strong>支持图片、视频与文档素材</div>
+                            <div><strong>服务支持</strong>7×12 小时在线响应</div>
                         </div>
                         <div class="usage-bar">
                             <div class="usage-track" aria-label="额度使用进度">
                                 <div class="usage-fill"></div>
                             </div>
-                            <p style="margin-top: 10px; color: var(--muted);">本月已生成 108 条视频草稿，市场部与销售支持共使用 72% 月度额度。</p>
+                            <p style="margin-top: 10px; color: var(--muted);">产品视频按“3 张图 + 4 条信息”生成，企业视频支持多素材组合，适合产品推广、客户跟进与企业宣传。</p>
                         </div>
                     </article>
                 </div>
@@ -634,35 +641,35 @@
                     <div class="list">
                         <article class="record">
                             <div class="section-top">
-                                <h3>水性聚氨酯分散体展会邀约版</h3>
-                                <span class="status ok">已完成</span>
+                                <h3>新型双组分水性聚氨酯产品视频底稿</h3>
+                                <span class="status ok">已配置</span>
                             </div>
                             <div class="record-meta">
-                                <span>生成时间：2026-04-29 15:42</span>
-                                <span>模板：展会邀约</span>
-                                <span>用途：CHINACOAT 客户预热</span>
+                                <span>模板：产品类模板</span>
+                                <span>素材：产品图 + 木家具效果图 + 品牌商标</span>
+                                <span>用途：产品推广 / 客户发送介绍</span>
                             </div>
                         </article>
                         <article class="record">
                             <div class="section-top">
-                                <h3>无卤阻燃助剂技术对比版</h3>
-                                <span class="status warn">审批中</span>
+                                <h3>无铬耐指纹剂 YD-100P 产品资料</h3>
+                                <span class="status warn">待补充</span>
                             </div>
                             <div class="record-meta">
-                                <span>生成时间：2026-04-28 11:08</span>
-                                <span>模板：性能对比</span>
-                                <span>说明：待法务确认数据表述</span>
+                                <span>模板：产品类模板</span>
+                                <span>素材：实拍产品图</span>
+                                <span>说明：可继续补充应用场景图与卖点文案</span>
                             </div>
                         </article>
                         <article class="record">
                             <div class="section-top">
-                                <h3>工业包装树脂客户案例版</h3>
-                                <span class="status wait">待修改</span>
+                                <h3>丁又化工企业宣传资料包</h3>
+                                <span class="status ok">已整理</span>
                             </div>
                             <div class="record-meta">
-                                <span>生成时间：2026-04-27 18:20</span>
-                                <span>模板：客户案例</span>
-                                <span>说明：建议替换客户现场图</span>
+                                <span>模板：企业类模板</span>
+                                <span>素材：品牌商标 + 产品系列图 + 使用手册</span>
+                                <span>说明：可继续补充企业实景与视频片段</span>
                             </div>
                         </article>
                     </div>
@@ -677,7 +684,7 @@
                             </div>
                             <div class="template-meta">
                                 <span>适用品类：助剂 / 树脂 / 功能母料</span>
-                                <span>近 30 天调用：18 次</span>
+                                <span>适用产品：无铬耐指纹剂 / 附着力促进剂 / 流平剂</span>
                                 <span>推荐原因：适合技术销售跟进</span>
                             </div>
                         </article>
@@ -687,9 +694,9 @@
                                 <button class="button secondary edit-trigger" type="button" data-title="设为默认模板" data-success="展会客户邀约型已设为默认模板。">设为默认</button>
                             </div>
                             <div class="template-meta">
-                                <span>适用场景：展会前邀约、客户签到提醒</span>
-                                <span>近 30 天调用：12 次</span>
-                                <span>推荐原因：支持地图和展位信息展示</span>
+                                <span>适用场景：客户跟进、产品发送介绍</span>
+                                <span>适用产品：新型双组分水性聚氨酯</span>
+                                <span>推荐原因：适合展示产品图与效果图</span>
                             </div>
                         </article>
                         <article class="template-card">
@@ -698,9 +705,9 @@
                                 <button class="button secondary edit-trigger" type="button" data-title="设为默认模板" data-success="案例证明型已设为默认模板。">设为默认</button>
                             </div>
                             <div class="template-meta">
-                                <span>适用场景：项目复盘、客户行业背书</span>
-                                <span>近 30 天调用：9 次</span>
-                                <span>推荐原因：可搭配工厂图与应用场景图</span>
+                                <span>适用场景：企业宣传、招商合作</span>
+                                <span>适用资料：品牌商标 / 产品系列图 / 使用手册</span>
+                                <span>推荐原因：便于整合企业资料与产品方向</span>
                             </div>
                         </article>
                     </div>
@@ -716,44 +723,44 @@
                     <div class="list">
                         <article class="approval-card">
                             <div class="section-top">
-                                <h3>无卤阻燃助剂技术对比版待法务确认</h3>
+                                <h3>无铬耐指纹剂产品图待补充应用说明</h3>
                                 <button class="button secondary collapse-trigger" type="button">展开详情</button>
                             </div>
                             <div class="approval-meta">
-                                <span>节点：法务审批</span>
-                                <span>责任人：王祎</span>
+                                <span>节点：资料核对</span>
+                                <span>资料类型：产品图</span>
                                 <span class="status warn">待确认</span>
                             </div>
                             <div class="collapse-body">
-                                当前卡片中的“阻燃效率提升 27%”需要与最新实验数据复核一致，确认后即可进入外发版本。
+                                当前已具备无铬耐指纹剂实拍图，可继续补充适用场景、卖点说明与成片文案。
                             </div>
                         </article>
                         <article class="approval-card">
                             <div class="section-top">
-                                <h3>CHINACOAT 展会邀约视频已通过市场总监审批</h3>
+                                <h3>新型双组分水性聚氨酯木家具效果图已入库</h3>
                                 <button class="button secondary collapse-trigger" type="button">展开详情</button>
                             </div>
                             <div class="approval-meta">
-                                <span>节点：市场总监</span>
-                                <span>责任人：周岚</span>
+                                <span>节点：素材入库</span>
+                                <span>资料类型：应用效果图</span>
                                 <span class="status ok">已通过</span>
                             </div>
                             <div class="collapse-body">
-                                可直接下载外发，也可以进入素材库选择展位图重新生成区域版本。
+                                该效果图可直接用于产品类模板的开场场景或效果展示段落。
                             </div>
                         </article>
                         <article class="approval-card">
                             <div class="section-top">
-                                <h3>工业包装树脂案例版被退回修改</h3>
+                                <h3>《化工企业短视频获客工具使用说明》已上传</h3>
                                 <button class="button secondary collapse-trigger" type="button">展开详情</button>
                             </div>
                             <div class="approval-meta">
-                                <span>节点：销售负责人</span>
-                                <span>责任人：陆骁</span>
-                                <span class="status wait">退回修改</span>
+                                <span>节点：资料归档</span>
+                                <span>资料类型：PDF 手册</span>
+                                <span class="status ok">已通过</span>
                             </div>
                             <div class="collapse-body">
-                                需要替换客户现场图并弱化未公开客户名称，修改后可重新提交审批。
+                                手册已可从导航与素材库访问，用于培训销售、市场和客户演示。
                             </div>
                         </article>
                     </div>
@@ -786,7 +793,7 @@
             localStorage.setItem(accountKey, demoAccount);
             localStorage.setItem(sessionKey, 'active');
         }
-        document.getElementById('demoAccount').textContent = demoAccount || savedAccount || 'market@huachengchem.com';
+        document.getElementById('demoAccount').textContent = demoAccount || savedAccount || '丁又化工企业账号';
 
         (function applySessionNav() {
             const loggedIn = localStorage.getItem(sessionKey) === 'active';

@@ -74,9 +74,15 @@
             width: 34px;
             height: 34px;
             border-radius: 8px;
-            color: var(--white);
+            overflow: hidden;
             background: var(--green);
-            font-size: 18px;
+        }
+
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .nav-links {
@@ -397,7 +403,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="主导航">
             <a class="brand" href="/">
-                <span class="brand-mark" aria-hidden="true">智</span>
+                <span class="brand-mark" aria-hidden="true"><img src="/static/real-assets/zhihuitui-mark.jpg" alt=""></span>
                 <span>智化推</span>
             </a>
             <div class="nav-links">
@@ -444,7 +450,7 @@
                         <div class="form-grid">
                             <div class="field">
                                 <label for="companyName">企业名称</label>
-                                <input id="companyName" type="text" placeholder="例如：华澄新材（苏州）有限公司" required>
+                                <input id="companyName" type="text" placeholder="例如：珠海市丁又化工有限公司" required>
                             </div>
                             <div class="field">
                                 <label for="videoGoal">视频目标</label>
@@ -457,11 +463,11 @@
                             </div>
                             <div class="field">
                                 <label for="mainProducts">主营产品</label>
-                                <input id="mainProducts" type="text" placeholder="例如：水性聚氨酯、无卤阻燃助剂、工业树脂" required>
+                                <input id="mainProducts" type="text" placeholder="例如：新型双组分水性聚氨酯、无铬耐指纹剂、附着力促进剂" required>
                             </div>
                             <div class="field">
                                 <label for="targetIndustries">目标行业</label>
-                                <input id="targetIndustries" type="text" placeholder="例如：建筑节能、电子封装、新能源汽车">
+                                <input id="targetIndustries" type="text" placeholder="例如：木家具涂装、PVC 印刷水墨、电子化学品">
                             </div>
                             <div class="field wide">
                                 <label for="companyIntro">企业简介</label>
@@ -507,7 +513,7 @@
                         </div>
 
                         <div class="actions">
-                            <button type="submit" class="button" id="companySubmitBtn">生成企业类视频方案</button>
+                            <button type="submit" class="button" id="companySubmitBtn">一键生成视频</button>
                             <div id="loading" aria-live="polite">
                                 <span class="spinner" aria-hidden="true"></span>
                                 <span>正在整理企业宣传片内容结构，请稍候...</span>

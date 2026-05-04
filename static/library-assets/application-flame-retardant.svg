@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420">
-  <rect width="640" height="420" fill="#eef3f7"/>
-  <rect x="52" y="70" width="250" height="280" rx="28" fill="#cedbea"/>
-  <rect x="90" y="120" width="176" height="178" rx="22" fill="#8aa7c5"/>
-  <path d="M150 250c18-34 38-56 58-70 8 18 22 34 40 48-10 26-32 50-72 68-20-10-32-28-26-46Z" fill="#ffffff"/>
-  <text x="334" y="150" fill="#1a3850" font-size="40" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">阻燃助剂应用场景</text>
-  <text x="334" y="212" fill="#51606d" font-size="24" font-family="PingFang SC, Microsoft YaHei, sans-serif">新能源汽车内饰阻燃材料示意图</text>
-  <text x="334" y="260" fill="#47698d" font-size="24" font-family="PingFang SC, Microsoft YaHei, sans-serif">适用：案例证明型 / 行业痛点型</text>
-</svg>

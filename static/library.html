@@ -80,9 +80,15 @@
             width: 34px;
             height: 34px;
             border-radius: 8px;
-            color: var(--white);
+            overflow: hidden;
             background: var(--green);
-            font-size: 18px;
+        }
+
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .nav-links {
@@ -504,7 +510,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="主导航">
             <a class="brand" href="/">
-                <span class="brand-mark" aria-hidden="true">智</span>
+                <span class="brand-mark" aria-hidden="true"><img src="/static/real-assets/zhihuitui-mark.jpg" alt=""></span>
                 <span>智化推</span>
             </a>
             <div class="nav-links">
@@ -520,15 +526,15 @@
         <section class="hero">
             <article class="hero-card" aria-labelledby="library-title">
                 <p class="eyebrow">企业素材库</p>
-                <h1 id="library-title">华澄新材品牌素材统一管理</h1>
-                <p>面向市场部、销售支持与产品经理的内部资产工作台。集中展示企业 Logo、产品图、应用场景图、工厂图、宣传文案与介绍资料，支持按分类、关键词和使用热度统一管理。</p>
+                <h1 id="library-title">丁又化工 · 益润宝素材库</h1>
+                <p>集中管理珠海市丁又化工有限公司的品牌商标、产品实拍图、木家具效果图、产品系列图与使用手册，便于快速生成产品推广视频与企业宣传视频。</p>
                 <div class="tag-row">
-                    <span class="tag">主营产品：水性聚氨酯</span>
-                    <span class="tag">品牌色：松柏绿 / 琥珀金</span>
-                    <span class="tag">宣传语：让功能材料表达得更清楚</span>
+                    <span class="tag">品牌商标：益润宝</span>
+                    <span class="tag">核心产品：新型双组分水性聚氨酯</span>
+                    <span class="tag">辅助品类：附着力促进剂 / 流平剂</span>
                 </div>
                 <div class="meta-row">
-                    <span>企业简介：服务涂料、包装、汽车与电子材料客户的功能性新材料供应商。</span>
+                    <span>产品方向：氟碳树脂系列、水性聚氨酯系列、电子化学品、附着力促进剂系列、无铬耐指纹剂、水性阳离子树脂系列。</span>
                 </div>
             </article>
 
@@ -536,20 +542,20 @@
                 <h2>素材概况</h2>
                 <div class="summary-grid">
                     <div class="summary-item">
-                        <strong>64 份</strong>
+                        <strong>9 份</strong>
                         <span>当前素材总数</span>
                     </div>
                     <div class="summary-item">
-                        <strong>19 份</strong>
-                        <span>产品图与应用图</span>
+                        <strong>3 份</strong>
+                        <span>产品图与效果图</span>
                     </div>
                     <div class="summary-item">
-                        <strong>12 份</strong>
-                        <span>宣传文案与介绍资料</span>
+                        <strong>4 份</strong>
+                        <span>产品系列与文档资料</span>
                     </div>
                     <div class="summary-item">
-                        <strong>4 条</strong>
-                        <span>待审核新上传内容</span>
+                        <strong>1 份</strong>
+                        <span>品牌商标素材</span>
                     </div>
                 </div>
             </aside>
@@ -575,9 +581,8 @@
                     <option value="企业介绍资料">企业介绍资料</option>
                 </select>
                 <select id="sortSelect">
-                    <option value="latest">按上传时间排序</option>
-                    <option value="usage">按使用次数排序</option>
                     <option value="name">按名称排序</option>
+                    <option value="category">按分类排序</option>
                 </select>
                 <button class="button secondary" type="button" id="clearFilters">清空筛选</button>
             </div>
@@ -616,15 +621,15 @@
         const sessionKey = 'chemvidDemoSession';
         const accountKey = 'chemvidDemoAccount';
         const assets = [
-            { id: 1, name: '华澄新材标准 Logo', category: '企业 Logo', uploadedAt: '2026-04-29', usage: 38, template: '品牌露出型', status: '已审核', tag: '推荐', desc: '适合视频收尾与封面角标使用。', image: '/static/library-assets/logo-standard.svg' },
-            { id: 2, name: '苯甲醛试剂瓶产品图 A', category: '产品图', uploadedAt: '2026-04-27', usage: 22, template: '技术参数强化型', status: '已审核', tag: '热用', desc: '苯甲醛试剂瓶实拍，适合精细化学品介绍与技术讲解视频。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Bottle_containing_benzaldehyde.jpg?width=480' },
-            { id: 3, name: '无卤阻燃助剂应用场景', category: '应用场景图', uploadedAt: '2026-04-25', usage: 17, template: '案例证明型', status: '已审核', tag: '新能源', desc: '汽车内饰实拍场景，可用于新能源汽车阻燃材料应用示意。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/A_car_interior.jpg?width=480' },
-            { id: 4, name: '苏州工厂外景航拍', category: '工厂/车间图', uploadedAt: '2026-04-24', usage: 9, template: '企业介绍型', status: '待审核', tag: '工厂形象', desc: '工厂园区航拍实景，适合企业实力展示或客户接待片头。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/An_aerial_shot_of_a_factory_complex.jpg?width=480' },
-            { id: 5, name: 'CHINACOAT 展会邀约文案', category: '宣传文案', uploadedAt: '2026-04-28', usage: 14, template: '展会邀约型', status: '已审核', tag: '展会', desc: '含展位号、时间与客户邀约话术。', image: '/static/library-assets/expo-copy.svg' },
-            { id: 6, name: '企业介绍 PDF 摘要版', category: '企业介绍资料', uploadedAt: '2026-04-21', usage: 11, template: '企业介绍型', status: '已审核', tag: '资料包', desc: '适合销售发送给新客户的介绍资料摘要。', image: '/static/library-assets/company-profile-pdf.svg' },
-            { id: 7, name: '耐候工业树脂产品图 B', category: '产品图', uploadedAt: '2026-04-30', usage: 7, template: '客户案例型', status: '已审核', tag: '新品', desc: '化工铁桶产品实拍，适合案例与性能对比。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Galvanized_chemical_drums.jpg?width=480' },
-            { id: 8, name: '电子封装客户产线图', category: '工厂/车间图', uploadedAt: '2026-04-23', usage: 6, template: '案例证明型', status: '待审核', tag: '客户现场', desc: '客户产线实拍照片，用于电子封装材料客户案例说明。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/The_production_line.jpg?width=480' },
-            { id: 9, name: '建筑保温应用主视觉', category: '应用场景图', uploadedAt: '2026-04-26', usage: 19, template: '应用痛点型', status: '已审核', tag: '建筑', desc: '建筑施工与保温应用实拍，适合开场痛点。', image: 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Building_construction.jpg?width=480' }
+            { id: 1, name: '益润宝品牌商标', category: '企业 Logo', source: '品牌商标', template: '品牌露出型', status: '已入库', tag: '品牌', related: '益润宝', desc: '用于视频封面、片尾角标与品牌收尾。', image: '/static/real-assets/yirunbao-logo.png' },
+            { id: 2, name: '新型双组分水性聚氨酯产品图', category: '产品图', source: '实拍产品图', template: '产品类模板', status: '已入库', tag: '主推', related: '新型双组分水性聚氨酯', desc: '用于产品特写、卖点展示与客户发送介绍。', image: '/static/real-assets/dingyou-waterborne-pu.jpg' },
+            { id: 3, name: '新型双组分水性聚氨酯木家具效果图', category: '应用场景图', source: '实拍效果图', template: '产品类模板', status: '已入库', tag: '木家具', related: '新型双组分水性聚氨酯', desc: '用于木家具涂装效果展示与开场场景段落。', image: '/static/real-assets/dingyou-pu-furniture.jpg' },
+            { id: 4, name: '无铬耐指纹剂 YD-100P 产品图', category: '产品图', source: '实拍产品图', template: '产品类模板', status: '已入库', tag: 'YD-100P', related: '无铬耐指纹剂', desc: '可用于无铬耐指纹剂产品介绍、客户跟进与技术讲解。', image: '/static/real-assets/dingyou-fingerprint-agent.jpg' },
+            { id: 5, name: '化工企业短视频获客工具使用说明', category: '企业介绍资料', source: 'PDF 手册', template: '企业类模板', status: '已入库', tag: '手册', related: '智化推使用说明', desc: '适合培训销售、市场与客户快速了解平台能力。', image: '/static/library-assets/company-profile-pdf.svg' },
+            { id: 6, name: '丁又化工产品系列图', category: '宣传文案', source: '产品系列资料', template: '企业类模板', status: '已入库', tag: '产品目录', related: '氟碳树脂 / 水性聚氨酯 / 电子化学品', desc: '展示企业当前主要产品方向，可用于企业宣传视频的产品概览段落。', image: '/static/real-assets/dingyou-product-lines.jpg' },
+            { id: 7, name: '附着力促进剂系列资料卡', category: '宣传文案', source: '产品系列资料', template: '产品类模板', status: '待补充', tag: '附着力促进剂', related: '附着力促进剂系列', desc: '适合补充附着力促进剂的参数、场景图和卖点文案。', image: '/static/real-assets/dingyou-product-lines.jpg' },
+            { id: 8, name: '流平剂系列资料卡', category: '宣传文案', source: '产品系列资料', template: '产品类模板', status: '待补充', tag: '流平剂', related: '流平剂系列', desc: '适合后续补充流平剂产品图、施工效果与应用场景。', image: '/static/real-assets/dingyou-product-lines.jpg' },
+            { id: 9, name: '水性阳离子树脂系列资料卡', category: '宣传文案', source: '产品系列资料', template: '企业类模板', status: '待补充', tag: '水性阳离子树脂', related: '水性阳离子树脂系列', desc: '可作为企业宣传视频中的产品线扩展资料。', image: '/static/real-assets/dingyou-product-lines.jpg' }
         ];
 
         const assetsGrid = document.getElementById('assetsGrid');
@@ -680,13 +685,10 @@
             });
 
             filtered.sort((a, b) => {
-                if (sort === 'usage') {
-                    return b.usage - a.usage;
+                if (sort === 'category') {
+                    return a.category.localeCompare(b.category, 'zh-CN');
                 }
-                if (sort === 'name') {
-                    return a.name.localeCompare(b.name, 'zh-CN');
-                }
-                return b.uploadedAt.localeCompare(a.uploadedAt);
+                return a.name.localeCompare(b.name, 'zh-CN');
             });
 
             return filtered;
@@ -699,7 +701,7 @@
             filtered.forEach((asset) => {
                 const card = document.createElement('article');
                 card.className = 'asset-card';
-                const statusClass = asset.status === '待审核' ? 'status pending' : 'status';
+                const statusClass = asset.status === '待补充' ? 'status pending' : 'status';
                 const checked = selectedIds.has(asset.id) ? 'checked' : '';
                 card.innerHTML = `
                     <div class="asset-cover"><img src="${asset.image}" alt="${asset.name}"></div>
@@ -712,11 +714,11 @@
                         <p class="asset-desc">${asset.desc}</p>
                         <div class="asset-meta">
                             <span>分类：${asset.category}</span>
-                            <span>上传时间：${asset.uploadedAt}</span>
-                            <span>使用次数：${asset.usage} 次</span>
+                            <span>素材来源：${asset.source}</span>
                             <span>适用模板：${asset.template}</span>
+                            <span>关联产品：${asset.related}</span>
                             <span>推荐标签：${asset.tag}</span>
-                            <span>审核状态：<span class="${statusClass}">${asset.status}</span></span>
+                            <span>资料状态：<span class="${statusClass}">${asset.status}</span></span>
                         </div>
                         <div class="asset-actions">
                             <button class="button secondary" type="button" data-preview="${asset.id}">预览</button>
@@ -765,7 +767,7 @@
                 return;
             }
             modalTitle.textContent = asset.name;
-            modalMeta.textContent = `${asset.category} · 上传于 ${asset.uploadedAt} · 使用 ${asset.usage} 次`;
+            modalMeta.textContent = `${asset.category} · ${asset.source} · ${asset.related}`;
             modalPreview.innerHTML = `<img src="${asset.image}" alt="${asset.name}">`;
             modalDesc.textContent = `${asset.desc} 适用模板：${asset.template}。当前状态：${asset.status}。`;
             modalBackdrop.classList.add('open');
@@ -778,14 +780,14 @@
         clearFilters.addEventListener('click', () => {
             searchInput.value = '';
             categoryFilter.value = '全部';
-            sortSelect.value = 'latest';
+            sortSelect.value = 'name';
             renderAssets();
         });
 
         document.getElementById('uploadBtn').addEventListener('click', () => {
             modalTitle.textContent = '上传素材';
             modalMeta.textContent = '支持上传图片、视频与文档素材。';
-            modalPreview.innerHTML = '<img src="/static/library-assets/logo-standard.svg" alt="上传素材预览">';
+            modalPreview.innerHTML = '<img src="/static/real-assets/yirunbao-logo.png" alt="上传素材预览">';
             modalDesc.textContent = '可在这里统一管理文件上传、标签配置、素材审核与去重校验流程。';
             modalBackdrop.classList.add('open');
         });

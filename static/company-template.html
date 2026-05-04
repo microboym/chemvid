@@ -71,9 +71,15 @@
             width: 34px;
             height: 34px;
             border-radius: 8px;
-            color: var(--white);
+            overflow: hidden;
             background: var(--green);
-            font-size: 18px;
+        }
+
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .nav-links {
@@ -360,7 +366,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="主导航">
             <a class="brand" href="/">
-                <span class="brand-mark" aria-hidden="true">智</span>
+                <span class="brand-mark" aria-hidden="true"><img src="/static/real-assets/zhihuitui-mark.jpg" alt=""></span>
                 <span>智化推</span>
             </a>
             <div class="nav-links">
@@ -405,46 +411,46 @@
                     <div class="form-grid">
                         <div class="field">
                             <label for="companyName">企业名称</label>
-                            <input id="companyName" name="companyName" value="华澄新材（苏州）有限公司" required>
+                            <input id="companyName" name="companyName" value="珠海市丁又化工有限公司" required>
                         </div>
                         <div class="field">
-                            <label for="companySlogan">品牌宣传语</label>
-                            <input id="companySlogan" name="companySlogan" value="让功能材料表达得更清楚" required>
+                            <label for="companySlogan">品牌商标 / 品牌名</label>
+                            <input id="companySlogan" name="companySlogan" value="益润宝" required>
                         </div>
                         <div class="field">
                             <label for="products">主营产品</label>
-                            <input id="products" name="products" value="水性聚氨酯分散体、无卤阻燃助剂、耐候工业树脂" required>
+                            <input id="products" name="products" value="新型双组分水性聚氨酯、无铬耐指纹剂、附着力促进剂、流平剂" required>
                         </div>
                         <div class="field">
                             <label for="industries">服务行业</label>
-                            <input id="industries" name="industries" value="建筑节能、工业包装、电子封装、新能源汽车" required>
+                            <input id="industries" name="industries" value="木家具涂装、PVC 印刷水墨、胶水、电子化学品" required>
                         </div>
                         <div class="field">
                             <label for="region">服务区域</label>
-                            <input id="region" name="region" value="华东、华南、东南亚样品市场">
+                            <input id="region" name="region" value="广东珠海">
                         </div>
                         <div class="field">
-                            <label for="contact">联系人与电话</label>
-                            <input id="contact" name="contact" value="市场中心 周岚 · 0512-6688 2190">
+                            <label for="contact">联系信息（选填）</label>
+                            <input id="contact" name="contact" value="">
                         </div>
                         <div class="field">
-                            <label for="brandColor">品牌主色</label>
-                            <input id="brandColor" name="brandColor" value="松柏绿 #1F7A55 / 琥珀金 #D8A02A">
+                            <label for="brandColor">品牌主色（选填）</label>
+                            <input id="brandColor" name="brandColor" value="">
                         </div>
                         <div class="field">
-                            <label for="certifications">资质认证</label>
-                            <input id="certifications" name="certifications" value="ISO 9001、ISO 14001、REACH 合规">
+                            <label for="certifications">资质资料（选填）</label>
+                            <input id="certifications" name="certifications" value="">
                         </div>
                         <div class="field wide">
                             <label for="companyIntro">企业简介</label>
-                            <textarea id="companyIntro" name="companyIntro">华澄新材专注于绿色树脂、涂层助剂和功能性新材料的研发与市场推广，服务涂料、包装、汽车与电子材料客户，适合用于技术销售、展会邀约和案例展示类视频。</textarea>
+                            <textarea id="companyIntro" name="companyIntro">珠海市丁又化工有限公司品牌商标为益润宝，当前已整理新型双组分水性聚氨酯、无铬耐指纹剂、附着力促进剂、流平剂等产品资料，可用于产品推广、客户跟进与企业宣传视频生成。</textarea>
                             <span class="hint">该信息将作为首页介绍、素材库摘要和用户中心资料的统一来源。</span>
                         </div>
                     </div>
 
                     <div class="actions">
                         <button class="button" type="submit">保存企业资料</button>
-                        <a class="button secondary" href="/generator/company">进入企业类模板</a>
+                        <a class="button secondary" href="/generator/company">一键生成视频</a>
                     </div>
                     <div class="feedback" id="templateFeedback" aria-live="polite"></div>
                 </form>
@@ -455,11 +461,11 @@
                 <h2 style="margin-top: 16px;">模板预览</h2>
                 <p style="margin-top: 8px; color: var(--muted);">当前内容会用于企业资料展示、素材摘要与企业类视频生成时的基础信息引用。</p>
                 <div class="preview-list" id="previewList">
-                    <div class="preview-item"><strong id="previewName">华澄新材（苏州）有限公司</strong><span id="previewSlogan">让功能材料表达得更清楚</span></div>
-                    <div class="preview-item"><strong>主营产品</strong><span id="previewProducts">水性聚氨酯分散体、无卤阻燃助剂、耐候工业树脂</span></div>
-                    <div class="preview-item"><strong>服务行业</strong><span id="previewIndustries">建筑节能、工业包装、电子封装、新能源汽车</span></div>
-                    <div class="preview-item"><strong>资质认证</strong><span id="previewCertifications">ISO 9001、ISO 14001、REACH 合规</span></div>
-                    <div class="preview-item"><strong>联系人</strong><span id="previewContact">市场中心 周岚 · 0512-6688 2190</span></div>
+                    <div class="preview-item"><strong id="previewName">珠海市丁又化工有限公司</strong><span id="previewSlogan">益润宝</span></div>
+                    <div class="preview-item"><strong>主营产品</strong><span id="previewProducts">新型双组分水性聚氨酯、无铬耐指纹剂、附着力促进剂、流平剂</span></div>
+                    <div class="preview-item"><strong>服务行业</strong><span id="previewIndustries">木家具涂装、PVC 印刷水墨、胶水、电子化学品</span></div>
+                    <div class="preview-item"><strong>资质资料</strong><span id="previewCertifications">按企业实际资料补充</span></div>
+                    <div class="preview-item"><strong>联系信息</strong><span id="previewContact">可按需补充</span></div>
                 </div>
             </aside>
         </section>

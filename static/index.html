@@ -72,9 +72,23 @@
             width: 34px;
             height: 34px;
             border-radius: 8px;
-            color: var(--white);
+            overflow: hidden;
             background: var(--green);
-            font-size: 18px;
+        }
+
+        .brand-mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-logo {
+            margin-top: 18px;
+            width: min(420px, 100%);
+            border-radius: 20px;
+            display: block;
+            box-shadow: 0 20px 48px rgba(20, 42, 24, 0.12);
         }
 
         .nav-links {
@@ -338,7 +352,7 @@
     <header class="site-header">
         <nav class="nav" aria-label="主导航">
             <a class="brand" href="/">
-                <span class="brand-mark" aria-hidden="true">智</span>
+                <span class="brand-mark" aria-hidden="true"><img src="/static/real-assets/zhihuitui-mark.jpg" alt=""></span>
                 <span>智化推</span>
             </a>
             <div class="nav-links">
@@ -359,6 +373,7 @@
                     <p class="eyebrow">面向化工企业的短视频生成工具</p>
                     <h1 id="hero-title">输入产品信息，快速生成中文竖版推广短视频</h1>
                     <p class="lead">智化推帮助中小型化工企业把产品名称、应用领域、性能卖点和企业图片合成为 15-20 秒推广视频，适合展会、客户沟通和新媒体发布前的快速出样。</p>
+                    <img class="hero-logo" src="/static/real-assets/zhihuitui-logo.jpg" alt="智化推平台标识">
                     <div class="actions" aria-label="主要操作">
                         <a class="button" href="/generator">开始生成</a>
                         <a class="button secondary" href="/login">企业账号登录</a>
