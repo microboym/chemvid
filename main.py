@@ -47,6 +47,14 @@ def serve_library():
 def serve_company_template():
     return FileResponse("static/company-template.html")
 
+@app.get("/manual")
+def download_manual():
+    return FileResponse(
+        "static/manual.pdf",
+        media_type="application/pdf",
+        filename="智化推使用手册.pdf"
+    )
+
 @app.post("/api/generate")
 async def generate_video(
     background_tasks: BackgroundTasks,
