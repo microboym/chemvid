@@ -527,7 +527,7 @@
             <article class="hero-card" aria-labelledby="library-title">
                 <p class="eyebrow">企业素材库</p>
                 <h1 id="library-title">丁又化工 · 益润宝素材库</h1>
-                <p>集中管理珠海市丁又化工有限公司的实拍产品图、木家具效果图与产品系列图，便于快速生成产品推广视频与企业宣传视频。</p>
+                <p>集中管理珠海市丁又化工有限公司的品牌商标、实拍产品图、木家具效果图与产品系列图，便于快速生成产品推广视频与企业宣传视频。</p>
                 <div class="tag-row">
                     <span class="tag">核心产品：新型双组分水性聚氨酯</span>
                     <span class="tag">重点素材：无铬耐指纹剂 YD-100P</span>
@@ -542,7 +542,7 @@
                 <h2>素材概况</h2>
                 <div class="summary-grid">
                     <div class="summary-item">
-                        <strong>4 份</strong>
+                        <strong>5 份</strong>
                         <span>当前素材总数</span>
                     </div>
                     <div class="summary-item">
@@ -554,8 +554,8 @@
                         <span>产品系列资料</span>
                     </div>
                     <div class="summary-item">
-                        <strong>0 份</strong>
-                        <span>品牌商标与手册</span>
+                        <strong>1 份</strong>
+                        <span>品牌商标素材</span>
                     </div>
                 </div>
             </aside>
@@ -621,10 +621,11 @@
         const sessionKey = 'chemvidDemoSession';
         const accountKey = 'chemvidDemoAccount';
         const assets = [
-            { id: 1, name: '丁又化工产品系列图', category: '宣传文案', source: '产品系列资料', template: '企业类模板', status: '已入库', tag: '产品目录', related: '氟碳树脂 / 水性聚氨酯 / 电子化学品', desc: '展示企业当前主要产品方向，可用于企业宣传视频的产品概览段落。', image: '/static/real-assets/dingyou-product-lines.jpg' },
-            { id: 2, name: '无铬耐指纹剂 YD-100P 产品图', category: '产品图', source: '实拍产品图', template: '产品类模板', status: '已入库', tag: 'YD-100P', related: '无铬耐指纹剂', desc: '可用于无铬耐指纹剂产品介绍、客户跟进与技术讲解。', image: '/static/real-assets/dingyou-fingerprint-agent.jpg' },
-            { id: 3, name: '新型双组分水性聚氨酯产品图', category: '产品图', source: '实拍产品图', template: '产品类模板', status: '已入库', tag: '主推', related: '新型双组分水性聚氨酯', desc: '用于产品特写、卖点展示与客户发送介绍。', image: '/static/real-assets/dingyou-waterborne-pu.jpg' },
-            { id: 4, name: '新型双组分水性聚氨酯木家具效果图', category: '应用场景图', source: '实拍效果图', template: '产品类模板', status: '已入库', tag: '木家具', related: '新型双组分水性聚氨酯', desc: '用于木家具涂装效果展示与开场场景段落。', image: '/static/real-assets/dingyou-pu-furniture.jpg' }
+            { id: 1, name: '益润宝品牌商标', category: '企业 Logo', source: '品牌商标', template: '企业类模板', status: '已入库', tag: '品牌', related: '益润宝', desc: '用于企业宣传视频片头、角标露出与片尾品牌收束。', image: '/static/real-assets/yirunbao-logo.png' },
+            { id: 2, name: '丁又化工产品系列图', category: '宣传文案', source: '产品系列资料', template: '企业类模板', status: '已入库', tag: '产品目录', related: '氟碳树脂 / 水性聚氨酯 / 电子化学品', desc: '展示企业当前主要产品方向，可用于企业宣传视频的产品概览段落。', image: '/static/real-assets/dingyou-product-lines.jpg' },
+            { id: 3, name: '无铬耐指纹剂 YD-100P 产品图', category: '产品图', source: '实拍产品图', template: '产品类模板', status: '已入库', tag: 'YD-100P', related: '无铬耐指纹剂', desc: '可用于无铬耐指纹剂产品介绍、客户跟进与技术讲解。', image: '/static/real-assets/dingyou-fingerprint-agent.jpg' },
+            { id: 4, name: '新型双组分水性聚氨酯产品图', category: '产品图', source: '实拍产品图', template: '产品类模板', status: '已入库', tag: '主推', related: '新型双组分水性聚氨酯', desc: '用于产品特写、卖点展示与客户发送介绍。', image: '/static/real-assets/dingyou-waterborne-pu.jpg' },
+            { id: 5, name: '新型双组分水性聚氨酯木家具效果图', category: '应用场景图', source: '实拍效果图', template: '产品类模板', status: '已入库', tag: '木家具', related: '新型双组分水性聚氨酯', desc: '用于木家具涂装效果展示与开场场景段落。', image: '/static/real-assets/dingyou-pu-furniture.jpg' }
         ];
 
         const assetsGrid = document.getElementById('assetsGrid');
